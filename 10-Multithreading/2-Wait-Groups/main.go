@@ -16,19 +16,19 @@ func task(name string, wg *sync.WaitGroup) {
 
 // Thread 1
 func main() {
-	waitGroup := sync.WaitGroup{}
-	waitGroup.Add(25)
+	waitgroups := sync.WaitGroup{}
+	waitgroups.Add(25)
 	// Thread 2
-	go task("A", &waitGroup)
+	go task("A", &waitgroups)
 	// Thread 3
-	go task("B", &waitGroup)
+	go task("B", &waitgroups)
 	// Thread 4
 	go func() {
 		for i := 0; i < 5; i++ {
-			fmt.Printf("%d: Task %s is running\n", i, "anonymous")
+			fmt.Printf("%d: Task %s is running, poha\n", i, "anonymous")
 			time.Sleep(1 * time.Second)
-			waitGroup.Done()
+			waitgroups.Done()
 		}
 	}()
-	waitGroup.Wait()
+	waitgroups.Wait()
 }
