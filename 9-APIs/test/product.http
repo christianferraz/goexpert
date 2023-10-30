@@ -5,3 +5,21 @@ Content-Type: application/json
   "name": "My product",
   "price": 200.0
 }
+###
+
+GET http://localhost:8000/products/698cc735-7560-4b67-8856-d4af4190ab82 HTTP/1.1
+
+###
+
+PUT http://localhost:8000/products/4af2ad26-a828-40d2-9d05-3121aee6d9d7
+Content-Type: application/json
+
+{
+  "name": "My product 2",
+  "price": 200.0
+}
+###
+
+DELETE  http://localhost:8000/products/4af2ad26-a828-40d2-9d05-3121aee6d9d7 HTTP/1.1
+
+###
