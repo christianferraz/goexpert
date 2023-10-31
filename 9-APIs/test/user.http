@@ -1,13 +1,19 @@
-POST http://localhost:8000/products
+POST http://localhost:8000/user
 Content-Type: application/json
 
 {
-  "name": "My product 12",
-  "price": 1200.0
+  "name": "Christian",
+  "email": "christian@christian.com",
+  "password":"EuTuEle"
 }
 ###
-GET http://localhost:8000/products HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTg3Mjg3NDQsInN1YiI6ImFmNWNjOTFiLWQwOWEtNDk1Ny05NTA2LTgwYTU0ZTEwZTQwZiJ9.bVWmigoKSXm-VEe5GAblK_GS_Z_-nkFRAzGRkyiF7ks
+POST http://localhost:8000/users/generate_token HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "christian@christian.com",
+  "password":"EuTuEle"
+}
 
 ###
 
