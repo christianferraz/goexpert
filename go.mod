@@ -10,6 +10,7 @@ require (
 	github.com/google/uuid v1.4.0
 	github.com/google/wire v0.5.0
 	github.com/mattn/go-sqlite3 v1.14.17
+	github.com/rabbitmq/amqp091-go v1.9.0
 	github.com/spf13/viper v1.17.0
 	github.com/streadway/amqp v1.1.0
 	github.com/stretchr/testify v1.8.4
@@ -60,6 +61,7 @@ require (
 	github.com/spf13/afero v1.10.0 // indirect
 	github.com/spf13/cast v1.5.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/urfave/cli/v2 v2.25.5 // indirect
