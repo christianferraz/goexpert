@@ -81,11 +81,9 @@ func replaceColonWithHyphen(macAddress *string) {
 }
 
 func ExecutePowerShell(scopeId, ipaddress, macaddress, hostname *string) {
-	domainUser := "ebserhnet\\adm.cpacheco"
-	password := "Miuchinh@050604"
 
 	command := fmt.Sprintf("Add-DhcpServerv4Reservation -ScopeId %s -IPAddress %s -ClientId %s -Name %s", *scopeId, *ipaddress, *macaddress, *hostname)
-	cmd := exec.Command("cmd", "/C", fmt.Sprintf("echo %s| runas /user:%s powershell -Command \"%s\"", password, domainUser, command))
+	cmd := exec.Command("powershell", "-Command", command)
 	err := cmd.Run()
 	if err != nil {
 		fmt.Printf("Command finished with error: %v", err)
