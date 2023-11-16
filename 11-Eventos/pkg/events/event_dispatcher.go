@@ -19,12 +19,12 @@ func NewEventDispatcher() *EventDispatcher {
 
 func (ev *EventDispatcher) Dispatch(event EventInterface) error {
 	if handlers, ok := ev.handlers[event.GetName()]; ok {
-        wg := &sync.WaitGroup{}
+		wg := &sync.WaitGroup{}
 		for _, handler := range handlers {
-            wg.Add(1)
-			go handler.Handle(event, wg) 
+			wg.Add(1)
+			go handler.Handle(event, wg)
 		}
-        wg.Wait()
+		wg.Wait()
 	}
 	return nil
 }
@@ -53,15 +53,15 @@ func (ed *EventDispatcher) Has(eventName string, handler EventHandlerInterface) 
 }
 
 func (ed *EventDispatcher) Remove(eventName string, handler EventHandlerInterface) error {
-    if _, ok := ed.handlers[eventName]; ok {
-        for i, h := range ed.handlers[eventName] {
-            if h == handler {
-                ed.handlers[eventName] = append(ed.handlers[eventName][:i], ed.handlers[eventName][i+1:]...)
-                return nil
-            }
-        }
-    }
-    return nil
+	if _, ok := ed.handlers[eventName]; ok {
+		for i, h := range ed.handlers[eventName] {
+			if h == handler {
+				ed.handlers[eventName] = append(ed.handlers[eventName][:i], ed.handlers[eventName][i+1:]...)
+				return nil
+			}
+		}
+	}
+	return nil
 }
 
 func (ed *EventDispatcher) Clear() {
