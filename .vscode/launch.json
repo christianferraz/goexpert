@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/3-Fundamentos/xml/2",
+      "program": "${workspaceFolder}/6-Banco_Dados/1",
       "console": "integratedTerminal"
     }
   ]
