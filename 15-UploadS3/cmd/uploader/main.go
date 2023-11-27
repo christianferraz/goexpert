@@ -14,6 +14,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+const uploadMax = 100
+
 var (
 	s3Client *s3.S3
 	s3Bucket string
@@ -46,19 +48,17 @@ func main() {
 		panic(err)
 	}
 	defer dir.Close()
-	uploadControl := make(chan struct{}, 100)
+	uploadControl := make(chan struct{}, uploadMax)
 	// se houver erro, indica qual arquivo falhou
 	errorFileUpload := make(chan string)
 	go func() {
-		for {
-			select {
-			case filename := <-errorFileUpload:
-				fmt.Printf("Error uploading file: %s\nRetrying\n", filename)
-				uploadControl <- struct{}{}
-				wg.Add(1)
-				go uploadFile(filename, uploadControl, errorFileUpload)
-			}
+		for filename := range errorFileUpload {
+			fmt.Printf("Error uploading file: %s\nRetrying\n", filename)
+			uploadControl <- struct{}{}
+			wg.Add(1)
+			go uploadFile(filename, uploadControl, errorFileUpload)
 		}
+
 	}()
 	for {
 		files, err := dir.ReadDir(1)
