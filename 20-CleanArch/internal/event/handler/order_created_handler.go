@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/christianferraz/goexpert/20-CleanArch/internal/events"
+	"github.com/christianferraz/goexpert/20-CleanArch/pkg/events"
 	"github.com/streadway/amqp"
 )
 

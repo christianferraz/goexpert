@@ -7,6 +7,8 @@ import (
 	"fmt"
 )
 
+// RepositoryFactory é uma função que recebe uma transação e retorna uma interface vazia
+// q será convertida para o tipo de repositório desejado
 type RepositoryFactory func(tx *sql.Tx) interface{}
 
 type UowInterface interface {
@@ -64,8 +66,9 @@ func (u *Uow) Do(ctx context.Context, fn func(Uow *Uow) error) error {
 	if err != nil {
 		errRb := u.Rollback()
 		if errRb != nil {
-			return fmt.Errorf(fmt.Sprintf("original error: %s, rollback error: %s", err.Error(), errRb.Error()))
+			return fmt.Errorf("original error: %s, rollback error: %s", err.Error(), errRb.Error())
 		}
+
 		return err
 	}
 	return u.CommitOrRollback()
@@ -88,7 +91,7 @@ func (u *Uow) CommitOrRollback() error {
 	if err != nil {
 		errRb := u.Rollback()
 		if errRb != nil {
-			return fmt.Errorf(fmt.Sprintf("original error: %s, rollback error: %s", err.Error(), errRb.Error()))
+			return fmt.Errorf("original error: %s, rollback error: %s", err.Error(), errRb.Error())
 		}
 		return err
 	}

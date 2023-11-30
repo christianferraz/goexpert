@@ -43,6 +43,7 @@ func (h *UserHandler) GetJWTInput(w http.ResponseWriter, r *http.Request) {
 	jwt := r.Context().Value("jwt").(*jwtauth.JWTAuth)
 	jwtExpiresIn := r.Context().Value("jwtExpiresIn").(int)
 	var user dto.GetJWTInput
+	//pega os dados passados na autenticação
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
 		error := Error{Message: err.Error()}
@@ -61,6 +62,7 @@ func (h *UserHandler) GetJWTInput(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
 	}
+	// criar o token com o mapa de chave string e valor de qualquer coisa
 	_, tokenString, err := jwt.Encode(map[string]interface{}{
 		"sub": u.ID.String(),
 		"exp": time.Now().Add(time.Second * time.Duration(jwtExpiresIn)).Unix(),

@@ -54,7 +54,12 @@ func main() {
 
 	r.Route("/products", func(r chi.Router) {
 		// adicionar o middleware para pegar os dados depois
+		// jwauth.Verifier vai verificar se existe algum token no request, pode ser na url, no header, etc
+		// no jwauth.Authenticator vai passar a assinatura do token para posteriormente validar
 		r.Use(jwtauth.Verifier(configs.TokenAuth))
+		// aqui ele valida o token com as configurações passadas acima se o token estiver invalido, vai
+		// retornar token is unauthorized com erro 401
+		// se estiver válido vai retornar o token status 200 e vai liberar os comandos abaixo restantes
 		r.Use(jwtauth.Authenticator)
 		r.Post("/", productHandler.CreateProduct)
 		r.Get("/", productHandler.GetProducts)

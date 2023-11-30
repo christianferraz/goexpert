@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"github.com/christianferraz/goexpert/20-CleanArch/internal/entity"
-	"github.com/christianferraz/goexpert/20-CleanArch/internal/events"
+	"github.com/christianferraz/goexpert/20-CleanArch/pkg/events"
 )
 
 type OrderInputDTO struct {
@@ -24,11 +24,15 @@ type CreateOrderUseCase struct {
 	EventDispatcher events.EventDispatcherInterface
 }
 
-func NewCreateOrderUseCase(orderRepository entity.OrderRepositoryInterface, orderCreated events.EventInterface, eventDispatcher events.EventDispatcherInterface) *CreateOrderUseCase {
+func NewCreateOrderUseCase(
+	OrderRepository entity.OrderRepositoryInterface,
+	OrderCreated events.EventInterface,
+	EventDispatcher events.EventDispatcherInterface,
+) *CreateOrderUseCase {
 	return &CreateOrderUseCase{
-		OrderRepository: orderRepository,
-		OrderCreated:    orderCreated,
-		EventDispatcher: eventDispatcher,
+		OrderRepository: OrderRepository,
+		OrderCreated:    OrderCreated,
+		EventDispatcher: EventDispatcher,
 	}
 }
 
@@ -42,13 +46,33 @@ func (c *CreateOrderUseCase) Execute(input OrderInputDTO) (OrderOutputDTO, error
 	if err := c.OrderRepository.Save(&order); err != nil {
 		return OrderOutputDTO{}, err
 	}
+
 	dto := OrderOutputDTO{
 		ID:         order.ID,
 		Price:      order.Price,
 		Tax:        order.Tax,
-		FinalPrice: order.FinalPrice,
+		FinalPrice: order.Price + order.Tax,
 	}
+
 	c.OrderCreated.SetPayload(dto)
 	c.EventDispatcher.Dispatch(c.OrderCreated)
+
+	return dto, nil
+}
+
+func (c *CreateOrderUseCase) GetOrder() (OrderOutputDTO, error) {
+	orders, err := c.OrderRepository.GetOrders()
+	if err != nil {
+		return OrderOutputDTO{}, err
+	}
+	var dto OrderOutputDTO
+	for _, order := range orders {
+		dto = OrderOutputDTO{
+			ID:         order.ID,
+			Price:      order.Price,
+			Tax:        order.Tax,
+			FinalPrice: order.Price + order.Tax,
+		}
+	}
 	return dto, nil
 }

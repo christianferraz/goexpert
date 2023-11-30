@@ -7,6 +7,8 @@ sql:
     go: 
       package: "db"
       out: "internal/db"
-
+      overrides:
+        - db_type: "decimal"
+          go_type: "float64"
 
 # executar sqlc generate

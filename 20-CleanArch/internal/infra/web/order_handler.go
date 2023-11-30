@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/christianferraz/goexpert/20-CleanArch/internal/entity"
-	"github.com/christianferraz/goexpert/20-CleanArch/internal/events"
 	"github.com/christianferraz/goexpert/20-CleanArch/internal/usecase"
+	"github.com/christianferraz/goexpert/20-CleanArch/pkg/events"
 )
 
 type WebOrderHandler struct {
@@ -28,22 +28,39 @@ func NewWebOrderHandler(
 }
 
 func (h *WebOrderHandler) Create(w http.ResponseWriter, r *http.Request) {
-	var dto usecase.OrderInputDTO
-	err := json.NewDecoder(r.Body).Decode(&dto)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
+	if r.Method == "POST" {
 
-	createOrder := usecase.NewCreateOrderUseCase(h.OrderRepository, h.OrderCreatedEvent, h.EventDispatcher)
-	output, err := createOrder.Execute(dto)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	err = json.NewEncoder(w).Encode(output)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		var dto usecase.OrderInputDTO
+		err := json.NewDecoder(r.Body).Decode(&dto)
+		if err != nil {
+			println(" carai ", r.Method)
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		createOrder := usecase.NewCreateOrderUseCase(h.OrderRepository, h.OrderCreatedEvent, h.EventDispatcher)
+		output, err := createOrder.Execute(dto)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		err = json.NewEncoder(w).Encode(output)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	} else if r.Method == "GET" {
+		dtoOrders, err := h.OrderRepository.GetOrders()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		err = json.NewEncoder(w).Encode(dtoOrders)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+	} else {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
 }

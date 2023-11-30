@@ -51,8 +51,3 @@ func LoadConfig(path string) (*Config, error) {
 	cfg.TokenAuth = jwtauth.New("HS256", []byte(cfg.JWTSecret), nil)
 	return cfg, nil
 }
-
-// será a primeira funçao a ser executada
-// func init() {
-
-// }
