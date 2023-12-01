@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -29,13 +30,22 @@ func main() {
 		cotaPaginasColoridasExcedentes = 422400
 		cotaTotal                      = 20070432
 	)
+	// file := xlsx.NewFile()
+	// sheet, err := file.AddSheet("Sheet1")
+	// if err != nil {
+	// 	fmt.Printf(err.Error())
+	// }
+
+	// i := 0
 	for _, arquivo := range arquivosExcel {
+
 		caminhoArquivo, err := filepath.Abs(arquivo)
 		if err != nil {
 			log.Fatal(err)
 		}
 
 		xlFile, err := xlsx.OpenFile(caminhoArquivo)
+
 		if err != nil {
 			log.Printf("Erro ao abrir o arquivo %s: %v\n", arquivo, err)
 			continue
@@ -69,13 +79,19 @@ func main() {
 			continue
 		}
 
+		// sheet.Cell(i, 0).SetValue(arquivo)
+		// sheet.Cell(i, 1).SetValue(valorPaginas)
+		// sheet.Cell(i, 2).SetValue(valorPaginasExcedentes)
+		// sheet.Cell(i, 3).SetValue(valorPaginasColoridas)
+		// sheet.Cell(i, 4).SetValue(valorPaginasColoridasExcedentes)
+		// i++
 		somaTotal += valorPaginas + valorPaginasExcedentes + valorPaginasColoridas + valorPaginasColoridasExcedentes
 		somaTotalPaginas += valorPaginas
 		somaTotalPaginasExcedentes += valorPaginasExcedentes
 		somaTotalPaginasColoridas += valorPaginasColoridas
 		somaTotalPaginasColoridasExcedentes += valorPaginasColoridasExcedentes
 	}
-
+	// sheet.File.Save("teste.xlsx")
 	// Imprimir os resultados
 	fmt.Printf("O valor total de páginas impressas p&b é %s faltam %s\n", formatNumber(somaTotalPaginas), formatNumber(cotaPaginas-somaTotalPaginas))
 	fmt.Printf("O valor total de páginas excedentes impressas p&b é %s faltam %s\n", formatNumber(somaTotalPaginasExcedentes), formatNumber(cotaPaginasExcedentes-somaTotalPaginasExcedentes))
@@ -85,28 +101,24 @@ func main() {
 }
 
 // Função auxiliar para formatar números com separador de milhares
-func formatNumber(numero int) string {
-	// Convert numero to string
-	numeroStr := strconv.Itoa(numero)
+func formatNumber(value int) string {
+	// Converter o valor para uma string
+	valueStr := strconv.Itoa(value)
 
-	// Determine the length of the number
-	numeroLen := len(numeroStr)
+	// Remover caracteres não numéricos
+	valueStr = regexp.MustCompile(`\D`).ReplaceAllString(valueStr, "")
 
-	// Check if a thousands separator is needed
-	separatorNeeded := numeroLen % 3
-	if separatorNeeded == 0 {
-		separatorNeeded = 3
-	}
+	// Remover zeros à esquerda
+	valueStr = regexp.MustCompile(`^[0]+`).ReplaceAllString(valueStr, "")
 
-	// Iterate over the digits of the number, adding a thousands separator every three digits
-	var stringNumero string
-	for i := 0; i < numeroLen; i++ {
-		if i > 0 && i%3 == separatorNeeded {
-			stringNumero += "."
+	// Adicionar pontos como separadores de milhares
+	var result string
+	for i := len(valueStr) - 1; i >= 0; i-- {
+		if (len(valueStr)-i-1)%3 == 0 && i != len(valueStr)-1 {
+			result = "." + result
 		}
-		stringNumero += string(numeroStr[i])
+		result = string(valueStr[i]) + result
 	}
 
-	// Return the formatted number
-	return stringNumero
+	return result
 }
