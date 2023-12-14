@@ -8,7 +8,6 @@ package main
 
 import (
 	"database/sql"
-
 	"github.com/christianferraz/goexpert/20-CleanArch/internal/entity"
 	"github.com/christianferraz/goexpert/20-CleanArch/internal/event"
 	"github.com/christianferraz/goexpert/20-CleanArch/internal/infra/database"
@@ -18,7 +17,18 @@ import (
 	"github.com/google/wire"
 )
 
+import (
+	_ "github.com/go-sql-driver/mysql"
+)
+
 // Injectors from wire.go:
+
+func NewListOrderUseCase(db *sql.DB, eventDispatcher events.EventDispatcherInterface) *usecase.ListOrderUseCase {
+	orderRepository := database.NewOrderRepository(db)
+	orderCreated := event.NewOrderCreated()
+	listOrderUseCase := usecase.NewListOrderUseCase(orderRepository, orderCreated, eventDispatcher)
+	return listOrderUseCase
+}
 
 func NewCreateOrderUseCase(db *sql.DB, eventDispatcher events.EventDispatcherInterface) *usecase.CreateOrderUseCase {
 	orderRepository := database.NewOrderRepository(db)

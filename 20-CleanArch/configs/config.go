@@ -16,7 +16,7 @@ type conf struct {
 }
 
 func LoadConfig(path string) (*conf, error) {
-	var cfg *conf
+	var cfg conf
 	viper.SetConfigName("app_config")
 	viper.SetConfigType("env")
 	viper.AddConfigPath(path)
@@ -28,7 +28,7 @@ func LoadConfig(path string) (*conf, error) {
 	}
 	err = viper.Unmarshal(&cfg)
 	if err != nil {
-		panic(err)
+		panic(err.Error())
 	}
-	return cfg, err
+	return &cfg, err
 }

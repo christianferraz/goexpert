@@ -11,13 +11,6 @@ type OrderInputDTO struct {
 	Tax   float64 `json:"tax"`
 }
 
-type OrderOutputDTO struct {
-	ID         string  `json:"id"`
-	Price      float64 `json:"price"`
-	Tax        float64 `json:"tax"`
-	FinalPrice float64 `json:"final_price"`
-}
-
 type CreateOrderUseCase struct {
 	OrderRepository entity.OrderRepositoryInterface
 	OrderCreated    events.EventInterface
@@ -57,22 +50,5 @@ func (c *CreateOrderUseCase) Execute(input OrderInputDTO) (OrderOutputDTO, error
 	c.OrderCreated.SetPayload(dto)
 	c.EventDispatcher.Dispatch(c.OrderCreated)
 
-	return dto, nil
-}
-
-func (c *CreateOrderUseCase) GetOrder() (OrderOutputDTO, error) {
-	orders, err := c.OrderRepository.GetOrders()
-	if err != nil {
-		return OrderOutputDTO{}, err
-	}
-	var dto OrderOutputDTO
-	for _, order := range orders {
-		dto = OrderOutputDTO{
-			ID:         order.ID,
-			Price:      order.Price,
-			Tax:        order.Tax,
-			FinalPrice: order.Price + order.Tax,
-		}
-	}
 	return dto, nil
 }
