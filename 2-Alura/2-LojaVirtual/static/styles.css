@@ -1,0 +1,188 @@
+/* Reset básico para remover espaçamentos padrões */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.display-5 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-sm-8 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 66.666667%;
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+select.form-control:not([size]):not([multiple]) {
+  height: calc(2.25rem + 2px);
+}
+
+select.form-control:focus::-ms-value {
+  color: #495057;
+  background-color: #fff;
+}
+
+.form-control-file,
+.form-control-range {
+  display: block;
+  width: 100%;
+}
+
+/* Estilização da tabela */
+table {
+  width: 100%;
+  /* Ocupa toda a largura do contêiner */
+  border-collapse: collapse;
+  /* Remove o espaçamento entre as bordas das células */
+  margin-top: 20px;
+  /* Adiciona um pouco de espaço no topo */
+}
+
+/* Estilização dos cabeçalhos da tabela */
+th {
+  background-color: #f2f2f2;
+  /* Cor de fundo para o cabeçalho */
+  text-align: center;
+  /* Alinhamento do texto para a esquerda */
+  padding: 10px;
+  /* Espaçamento interno */
+}
+
+/* Estilização das células da tabela */
+td {
+  border: 1px solid #dddddd;
+  /* Borda das células */
+  padding: 10px;
+  /* Espaçamento interno */
+}
+
+/* Adiciona uma cor de fundo alternativa para as linhas */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Estilização do corpo da tabela */
+tbody tr:hover {
+  background-color: #f1f1f1;
+  /* Cor de fundo quando o mouse passa por cima */
+}
+
+.card-footer {
+  padding: 50px;
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+  border: 1px solid #ddd;
+  background: blue;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.btn-danger {
+  background: red;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+}
+
+.jumbotron-fluid {
+  padding-right: 0;
+  padding-left: 0;
+  border-radius: 0;
+}
