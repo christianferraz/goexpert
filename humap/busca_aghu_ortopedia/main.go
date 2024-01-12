@@ -6,6 +6,7 @@ import (
 	"log"
 
 	_ "github.com/lib/pq"
+	"github.com/tealeg/xlsx"
 )
 
 // Cirurgia representa uma estrutura para dados de cirurgias.
@@ -42,32 +43,23 @@ type InformacoesCirurgia struct {
 	DthrSaidaSala        sql.NullTime   `json:"dthr_saida_sala"`
 	DthrEntradaSr        sql.NullTime   `json:"dthr_entrada_sr"`
 	DthrSaidaSr          sql.NullTime   `json:"dthr_saida_sr"`
-	DocumentoPac         sql.NullString `json:"documento_pac"`
 	DthrDigitNotaSala    sql.NullTime   `json:"dthr_digit_nota_sala"`
 	Asa                  sql.NullInt16  `json:"asa"`
 	DthrUltAtlzNotaSala  sql.NullTime   `json:"dthr_ult_atlz_nota_sala"`
 	TempoPrevHrs         sql.NullInt16  `json:"tempo_prev_hrs"`
 	TempoPrevMin         sql.NullInt16  `json:"tempo_prev_min"`
-	NumeroAp             sql.NullInt64  `json:"numero_ap"`
 	CctCodigo            sql.NullInt64  `json:"cct_codigo"`
 	IndTemDescricao      sql.NullString `json:"ind_tem_descricao"`
-	VvcQesMtcSeq         sql.NullInt64  `json:"vvc_qes_mtc_seq"`
-	VvcQesSeqp           sql.NullInt64  `json:"vvc_qes_seqp"`
-	VvcSeqp              sql.NullInt64  `json:"vvc_seqp"`
-	QesMtcSeq            sql.NullInt64  `json:"qes_mtc_seq"`
-	QesSeqp              sql.NullInt64  `json:"qes_seqp"`
 	ComplementoCanc      sql.NullString `json:"complemento_canc"`
 	IndOverbooking       sql.NullString `json:"ind_overbooking"`
 	DthrInicioOrdem      sql.NullTime   `json:"dthr_inicio_ordem"`
-	OrigemIntLocal       sql.NullString `json:"origem_int_local"`
 	MomentoAgend         sql.NullString `json:"momento_agend"`
 	UtilizacaoSala       sql.NullString `json:"utilizacao_sala"`
-	SpeSeq               sql.NullInt64  `json:"spe_seq"`
-	PjqSeq               sql.NullInt64  `json:"pjq_seq"`
 	Version              sql.NullInt64  `json:"version"`
 	IndAplLstCrgSeg      sql.NullString `json:"ind_apl_lst_crg_seg"`
 	IndPrc               sql.NullString `json:"ind_prc"`
 	AtbProf              sql.NullString `json:"atb_prof"`
+	DthrAtbProf          sql.NullTime   `json:"dthr_atb_prof"`
 }
 
 func main() {
@@ -91,65 +83,111 @@ func main() {
 	}
 
 	log.Println("Successfully connected!")
+	GetXls(db, 0)
+}
+
+func GetXls(db *sql.DB, prontuario int64) (string, error) {
+	arquivo, err := xlsx.OpenFile("cirorto2023faturado_20231228.xlsx")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	planilha := arquivo.Sheet["cirorto2023faturado_20231228"]
+	if planilha == nil {
+		log.Fatal("Planilha não encontrada")
+		return "", fmt.Errorf("Planilha não encontrada")
+	}
+
+	for _, row := range planilha.Rows {
+		if row != nil && len(row.Cells) > 0 {
+			cell := row.Cells[0] // Célula da coluna A
+			text := cell.String()
+			nome, _ := GetCNS(db, text)
+
+			row.Cells[1].Value = nome
+
+		}
+
+	}
+	arquivo.Save("cirorto2023faturado_202312282.xlsx")
+
+	// err := db.QueryRow(`SELECT cns FROM agh.aip_pacientes WHERE codigo = $1`, prontuario).Scan(&cns)
+	// if err != nil {
+	// 	return "", err
+	// }
+
+	return "cns", nil
+}
+
+func GetCNS(db *sql.DB, cns string) (string, error) {
+	var pessoa string
+
+	row := db.QueryRow(`SELECT pes.nome FROM agh.rap_pessoa_tipo_informacoes AS tii
+	LEFT JOIN agh.rap_pessoas_fisicas pes ON pes.codigo = tii.pes_codigo
+	WHERE tii.tii_seq = 7 AND tii.valor = $1`, cns)
+	err := row.Scan(&pessoa)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			fmt.Println("Nenhum resultado encontrado.")
+			return "", err
+		}
+		log.Println(err.Error())
+		return "", err
+	}
+	return pessoa, nil
+}
+
+func GetInformacoesCirurgia(db *sql.DB, prontuario int64) ([]InformacoesCirurgia, error) {
 	rows, err := db.Query(`select 
-	agd.seq AS agd_seq,
-			cir.seq,
-			cir.pac_codigo,
-			pacientes.prontuario, 
-			pacientes.nome AS Paciente,
-			TO_CHAR(pacientes.dt_nascimento, 'DD/MM/YYYY') AS dt_nascimento_paciente,
-			age(pacientes.dt_nascimento),
-			uni_func.descricao AS Unidade,
-			PF.nome AS Medico,
-			esp.nome_especialidade,
-			cir.esp_seq,
-			pci.descricao AS procedimento_cirurgia, 
-			cir.data, 
-			cir.nro_agenda, 
-			cir.situacao, 
-			cir.natureza_agend, 
-			cir.origem_pac_cirg, 
-			cir.sci_seqp, 
-			cir.atd_seq,  
-			cir.dpa_seq, 
-			cir.dthr_prev_inicio, 
-			cir.dthr_prev_fim, 
-			cir.tempo_utlz_o2, 
-			cir.tempo_utlz_pro_azot, 
-			cir.dthr_inicio_anest, 
-			cir.dthr_fim_anest, 
-			cir.dthr_inicio_cirg, 
-			cir.dthr_fim_cirg, 
-			cir.dthr_entrada_sala, 
-			cir.dthr_saida_sala, 
-			cir.dthr_entrada_sr, 
-			cir.dthr_saida_sr, 
-			cir.documento_pac, 
-			cir.dthr_digit_nota_sala, 
-			cir.asa, 
-			cir.dthr_ult_atlz_nota_sala, 
-			cir.tempo_prev_hrs, 
-			cir.tempo_prev_min, 
-			cir.numero_ap, 
-			cir.cct_codigo, 
-			cir.ind_tem_descricao, 
-			cir.vvc_qes_mtc_seq, 
-			cir.vvc_qes_seqp, 
-			cir.vvc_seqp, 
-			cir.qes_mtc_seq, 
-			cir.qes_seqp, 
-			cir.complemento_canc, 
-			cir.ind_overbooking, 
-			cir.dthr_inicio_ordem, 
-			cir.origem_int_local, 
-			cir.momento_agend, 
-			cir.utilizacao_sala, 
-			cir.spe_seq, 
-			cir.pjq_seq, 
-			cir.version, 
-			cir.ind_apl_lst_crg_seg, 
-			cir.ind_prc, 
-			cir.atb_prof
+		agd.seq AS agd_seq,
+		cir.seq,
+		cir.pac_codigo,
+		pacientes.prontuario, 
+		pacientes.nome AS Paciente,
+		TO_CHAR(pacientes.dt_nascimento, 'DD/MM/YYYY') AS dt_nascimento_paciente,
+		age(pacientes.dt_nascimento),
+		uni_func.descricao AS Unidade,
+		PF.nome AS Medico,
+		esp.nome_especialidade,
+		cir.esp_seq,
+		pci.descricao AS procedimento_cirurgia, 
+		cir.data, 
+		cir.nro_agenda, 
+		cir.situacao, 
+		cir.natureza_agend, 
+		cir.origem_pac_cirg, 
+		cir.sci_seqp, 
+		cir.atd_seq, 
+		cir.dpa_seq, 
+		cir.dthr_prev_inicio, 
+		cir.dthr_prev_fim, 
+		cir.tempo_utlz_o2, 
+		cir.tempo_utlz_pro_azot, 
+		cir.dthr_inicio_anest, 
+		cir.dthr_fim_anest, 
+		cir.dthr_inicio_cirg, 
+		cir.dthr_fim_cirg, 
+		cir.dthr_entrada_sala, 
+		cir.dthr_saida_sala, 
+		cir.dthr_entrada_sr, 
+		cir.dthr_saida_sr, 
+		cir.dthr_digit_nota_sala, 
+		cir.asa, 
+		cir.dthr_ult_atlz_nota_sala, 
+		cir.tempo_prev_hrs, 
+		cir.tempo_prev_min, 
+		cir.cct_codigo, 
+		cir.ind_tem_descricao, 
+		cir.complemento_canc, 
+		cir.ind_overbooking, 
+		cir.dthr_inicio_ordem, 
+		cir.momento_agend, 
+		cir.utilizacao_sala, 
+		cir.version, 
+		cir.ind_apl_lst_crg_seg, 
+		cir.ind_prc, 
+		cir.atb_prof, 
+		cir.dthr_atb_prof
 	FROM agh.mbc_cirurgias cir
 	INNER JOIN agh.mbc_proc_descricoes proc_desc ON cir.seq = proc_desc.dcg_crg_seq
 	INNER JOIN agh.mbc_procedimento_cirurgicos proc_cir ON proc_desc.dcg_seqp = proc_cir.seq 
@@ -162,10 +200,10 @@ func main() {
 	INNER JOIN agh.rap_servidores servidores ON servidores.matricula = agd.puc_ser_matricula AND servidores.vin_codigo = agd.puc_ser_vin_codigo
 	INNER JOIN agh.rap_pessoas_fisicas PF ON servidores.pes_codigo = PF.codigo
 	INNER JOIN agh.aip_pacientes pacientes ON pacientes.codigo = cir.pac_codigo
-	WHERE pacientes.prontuario = 8048487
-	LIMIT 10`)
+	WHERE cir.dthr_inicio_ordem BETWEEN '2023-01-01' AND '2023-12-31' LIMIT 10`)
 	if err != nil {
 		log.Fatal(err)
+		return nil, err
 	}
 	defer rows.Close()
 	var cirurgias []InformacoesCirurgia
@@ -206,36 +244,27 @@ func main() {
 			&cirurgia.DthrSaidaSala,
 			&cirurgia.DthrEntradaSr,
 			&cirurgia.DthrSaidaSr,
-			&cirurgia.DocumentoPac,
 			&cirurgia.DthrDigitNotaSala,
 			&cirurgia.Asa,
 			&cirurgia.DthrUltAtlzNotaSala,
 			&cirurgia.TempoPrevHrs,
 			&cirurgia.TempoPrevMin,
-			&cirurgia.NumeroAp,
 			&cirurgia.CctCodigo,
 			&cirurgia.IndTemDescricao,
-			&cirurgia.VvcQesMtcSeq,
-			&cirurgia.VvcQesSeqp,
-			&cirurgia.VvcSeqp,
-			&cirurgia.QesMtcSeq,
-			&cirurgia.QesSeqp,
 			&cirurgia.ComplementoCanc,
 			&cirurgia.IndOverbooking,
 			&cirurgia.DthrInicioOrdem,
-			&cirurgia.OrigemIntLocal,
 			&cirurgia.MomentoAgend,
 			&cirurgia.UtilizacaoSala,
-			&cirurgia.SpeSeq,
-			&cirurgia.PjqSeq,
 			&cirurgia.Version,
 			&cirurgia.IndAplLstCrgSeg,
 			&cirurgia.IndPrc,
 			&cirurgia.AtbProf,
+			&cirurgia.DthrAtbProf,
 		)
 		if err != nil {
-			log.Printf("eu")
 			log.Fatal(err)
+			return nil, err
 		}
 		cirurgias = append(cirurgias, cirurgia)
 	}
@@ -243,6 +272,9 @@ func main() {
 		log.Fatal(err)
 	}
 	for _, c := range cirurgias {
-		fmt.Printf("%+v\n\n", c)
+		dd := c.DthrUltAtlzNotaSala.Time.Format("02/01/2006 15:04:05")
+
+		fmt.Printf("%+v\n\n", dd)
 	}
+	return cirurgias, nil
 }
