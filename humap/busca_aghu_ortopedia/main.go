@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/christianferraz/goexpert/humap/busca_aghu_ortopedia/configs"
 	_ "github.com/lib/pq"
 	"github.com/tealeg/xlsx"
 )
@@ -63,14 +64,18 @@ type InformacoesCirurgia struct {
 }
 
 func main() {
-	const (
-		host     = "10.42.1.23"
-		port     = 6544 // Porta padrão do PostgreSQL
-		user     = "ugen_integra"
-		password = "aghuintegracao"
-		dbname   = "dbaghu"
-	)
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+	config, err := configs.LoadConfig(".")
+	if err != nil {
+		panic(err)
+	}
+
+	host := config.DBHost
+	port := config.DBPort
+	user := config.DBUser
+	password := config.DBPassword
+	dbname := config.DBName
+
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
