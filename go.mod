@@ -4,7 +4,7 @@ go 1.21.6
 
 require (
 	github.com/99designs/gqlgen v0.17.42
-	github.com/aws/aws-sdk-go v1.49.20
+	github.com/aws/aws-sdk-go v1.49.21
 	github.com/christianferraz/CleanArch v0.0.0-20231211125936-699bae7bbdee
 	github.com/go-chi/chi/v5 v5.0.11
 	github.com/go-chi/jwtauth v1.2.0
@@ -35,6 +35,7 @@ require (
 require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	google.golang.org/genproto v0.0.0-20240102182953-50ed04b92917 // indirect
 )
 
 require (

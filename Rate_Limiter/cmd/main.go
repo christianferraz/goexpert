@@ -17,19 +17,19 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	r := redis.NewClient(&redis.Options{
+	rds := redis.NewClient(&redis.Options{
 		Addr:     config.RedisSrc,
 		Password: config.RedisPass,
 		DB:       0,
 	})
-	defer r.Close()
-	pong, err := r.Ping(ctx).Result()
+	defer rds.Close()
+	pong, err := rds.Ping(ctx).Result()
 	if err != nil {
 		panic(err.Error())
 	}
 	fmt.Println("Conexão ao Redis estabelecida:", pong)
 
-	http.HandleFunc("/", middleware.CountMiddleware(handler, &ctx, r))
+	http.HandleFunc("/", middleware.CountMiddleware(handler, &ctx, rds))
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatalf("error: %s\n", err.Error())
 	}
