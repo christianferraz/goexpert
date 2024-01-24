@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/christianferraz/goexpert/Rate_Limiter/configs"
+	"github.com/christianferraz/goexpert/Rate_Limiter/limiter"
 	"github.com/christianferraz/goexpert/Rate_Limiter/middleware"
 	"github.com/redis/go-redis/v9"
 )
@@ -28,8 +29,8 @@ func main() {
 		panic(err.Error())
 	}
 	fmt.Println("Conexão ao Redis estabelecida:", pong)
-
-	http.HandleFunc("/", middleware.CountMiddleware(handler, &ctx, rds))
+	rl := limiter.NewRateLimiter(config, rds)
+	http.HandleFunc("/", middleware.CountMiddleware(handler, rl))
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatalf("error: %s\n", err.Error())
 	}

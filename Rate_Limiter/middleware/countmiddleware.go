@@ -1,72 +1,43 @@
 package middleware
 
 import (
-	"context"
 	"fmt"
 	"net"
 	"net/http"
-	"strconv"
 	"strings"
-	"time"
 
-	"github.com/redis/go-redis/v9"
+	"github.com/christianferraz/goexpert/Rate_Limiter/limiter"
 )
 
-func CountMiddleware(next http.HandlerFunc, ctx *context.Context, rdb *redis.Client) http.HandlerFunc {
+func CountMiddleware(next http.HandlerFunc, rateLimiter *limiter.RateLimiter) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		authHeader := r.Header.Get("Authorization")
+		token := strings.TrimPrefix(authHeader, "Bearer ")
 
-		key := fmt.Sprintf("%s-%s", getIPAdress(r), r.URL.Path)
-		val, err := rdb.Get(*ctx, key).Result()
-		if err != nil {
-			if err != redis.Nil {
-				panic(err)
-			}
-			val = "0"
-		}
-		count, err := strconv.Atoi(val)
-		if err != nil {
-			panic(err)
-		}
-		if count > 10 {
+		key := fmt.Sprintf("%s-%s", getIPAddress(r), r.URL.Path)
+		if rateLimiter.IsLimited(r.Context(), key, token) {
 			http.Error(w, "Rate limit exceeded", http.StatusTooManyRequests)
-			return
+			return // Parar a execução aqui se o limite foi excedido
 		}
-		count++
-		w.Write([]byte(fmt.Sprintf("Você é o visitante número %v\n", getIPAdress(r))))
-		fmt.Println("eu sou o key", getIPAdress(r))
-		if err := rdb.Set(*ctx, key, count, 10*time.Second).Err(); err != nil {
-			panic(err)
-		}
+		fmt.Fprintf(w, "Token recebido: %s", token)
 		next.ServeHTTP(w, r)
 	})
 }
 
-func getIPAdress(r *http.Request) string {
-	//Get IP from the X-REAL-IP header
+func getIPAddress(r *http.Request) string {
 	ip := r.Header.Get("X-REAL-IP")
-	netIP := net.ParseIP(ip)
-	if netIP != nil {
+	if ip != "" {
 		return ip
 	}
 
-	//Get IP from X-FORWARDED-FOR header
-	ips := r.Header.Get("X-FORWARDED-FOR")
-	splitIps := strings.Split(ips, ",")
-	for _, ip := range splitIps {
-		netIP := net.ParseIP(ip)
-		if netIP != nil {
-			return ip
-		}
+	forwarded := r.Header.Get("X-FORWARDED-FOR")
+	if forwarded != "" {
+		splitIPs := strings.Split(forwarded, ",")
+		return strings.TrimSpace(splitIPs[0])
 	}
-
-	//Get IP from RemoteAddr
 	ip, _, err := net.SplitHostPort(r.RemoteAddr)
 	if err != nil {
 		return ""
 	}
-	netIP = net.ParseIP(ip)
-	if netIP != nil {
-		return ip
-	}
-	return ""
+	return ip
 }

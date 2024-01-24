@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/humap/busca_aghu_ortopedia",
+      "program": "${workspaceFolder}/Rate_Limiter/cmd",
       "console": "integratedTerminal"
     }
   ],

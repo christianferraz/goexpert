@@ -1,18 +1,15 @@
 package configs
 
 import (
-	"github.com/go-chi/jwtauth"
 	"github.com/spf13/viper"
 )
 
 // O mapstructure vai ler os arquivos .env e jogar nas variaveis do struct
 
 type Config struct {
-	RedisSrc     string `mapstructure:"REDIS_SRC"`
-	RedisPass    string `mapstructure:"REDIS_PASS"`
-	JWTSecret    string `mapstructure:"JWT_SECRET"`
-	JWTExpiresIn int    `mapstructure:"JWT_EXPIRESIN"`
-	TokenAuth    *jwtauth.JWTAuth
+	RedisSrc      string `mapstructure:"REDIS_SRC"`
+	RedisPass     string `mapstructure:"REDIS_PASS"`
+	AllowedTokens []string
 }
 
 func LoadConfig(path string) (*Config, error) {
@@ -43,6 +40,9 @@ func LoadConfig(path string) (*Config, error) {
 	if err != nil {
 		panic(err)
 	}
-	cfg.TokenAuth = jwtauth.New("HS256", []byte(cfg.JWTSecret), nil)
+	cfg.AllowedTokens = []string{
+		"token1",
+		"token2",
+	}
 	return cfg, nil
 }
