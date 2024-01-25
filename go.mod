@@ -4,7 +4,7 @@ go 1.21.6
 
 require (
 	github.com/99designs/gqlgen v0.17.43
-	github.com/aws/aws-sdk-go v1.50.2
+	github.com/aws/aws-sdk-go v1.50.3
 	github.com/christianferraz/CleanArch v0.0.0-20231211125936-699bae7bbdee
 	github.com/go-chi/chi/v5 v5.0.11
 	github.com/go-chi/jwtauth v1.2.0
