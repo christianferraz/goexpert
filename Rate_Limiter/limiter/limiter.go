@@ -2,10 +2,9 @@ package limiter
 
 import (
 	"context"
-	"strconv"
-	"time"
 
 	"github.com/christianferraz/goexpert/Rate_Limiter/configs"
+	"github.com/go-redis/redis_rate/v10"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -22,6 +21,7 @@ func NewRateLimiter(config *configs.Config, client *redis.Client) *RateLimiter {
 }
 
 func (r *RateLimiter) IsLimited(ctx context.Context, key string, token string) bool {
+	r_limiter := redis_rate.NewLimiter(r.RedisClient)
 	var requestLimit int
 	if isValidToken(token, r.config.AllowedTokens) {
 		requestLimit = 100
@@ -29,21 +29,14 @@ func (r *RateLimiter) IsLimited(ctx context.Context, key string, token string) b
 		requestLimit = 10
 	}
 
-	val, err := r.RedisClient.Get(ctx, key).Result()
-	if err != nil && err != redis.Nil {
+	requestLimit++
+	res, err := r_limiter.Allow(ctx, key, redis_rate.PerSecond(requestLimit))
+	if err != nil {
 		return true
 	}
-
-	count, _ := strconv.Atoi(val)
-	if count >= requestLimit {
+	if res.Remaining <= 0 {
 		return true
 	}
-
-	count++
-	if err := r.RedisClient.Set(ctx, key, strconv.Itoa(count), time.Second*time.Duration(requestLimit)).Err(); err != nil {
-		return true
-	}
-
 	return false
 }
 
