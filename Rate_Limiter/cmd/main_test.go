@@ -20,6 +20,7 @@ func TestRateLimiterUnderLimit(t *testing.T) {
 		go func(i int) {
 			defer wg.Done()
 			resp, err := http.Get("http://localhost:8080/") // Substitua pela URL do seu servidor
+			http.Get()
 			if err != nil || resp.StatusCode != http.StatusOK {
 				t.Errorf("Requisição falhou ou foi inesperadamente limitada %v", resp.StatusCode)
 			}
