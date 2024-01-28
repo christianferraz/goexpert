@@ -7,20 +7,23 @@ import (
 	"time"
 )
 
-// TestRateLimiterUnderLimit testa se as requisições estão passando quando estão abaixo do limite
-func TestRateLimiterUnderLimit(t *testing.T) {
-	// Substitua pela lógica de inicialização do seu servidor e rate limiter
-	// ...
+func TestRateLimiterUnderLimitWithToken(t *testing.T) {
 
-	totalRequests := 9 // Número de requisições menor que o limite
+	totalRequests := 100 // Número de requisições menor que o limite
 	var wg sync.WaitGroup
 	wg.Add(totalRequests)
 
 	for i := 0; i < totalRequests; i++ {
 		go func(i int) {
 			defer wg.Done()
-			resp, err := http.Get("http://localhost:8080/") // Substitua pela URL do seu servidor
-			http.Get()
+			req, err := http.NewRequest("GET", "http://localhost:8080/", nil)
+			if err != nil {
+				t.Errorf("Erro ao fazer requisição: %v", err)
+			}
+			req.Header.Set("API_KEY", "token1")
+			client := &http.Client{}
+			resp, err := client.Do(req)
+
 			if err != nil || resp.StatusCode != http.StatusOK {
 				t.Errorf("Requisição falhou ou foi inesperadamente limitada %v", resp.StatusCode)
 			}
@@ -32,7 +35,29 @@ func TestRateLimiterUnderLimit(t *testing.T) {
 	t.Logf("Todas as requisições foram feitas com sucesso")
 }
 
-// TestRateLimiterOverLimit testa se o rate limiter está bloqueando requisições acima do limite
+func TestRateLimiterUnderLimit(t *testing.T) {
+	// ...
+
+	totalRequests := 99 // Número de requisições menor que o limite
+	var wg sync.WaitGroup
+	wg.Add(totalRequests)
+
+	for i := 0; i < totalRequests; i++ {
+		go func(i int) {
+			defer wg.Done()
+			resp, err := http.Get("http://localhost:8080/")
+
+			if err != nil || resp.StatusCode != http.StatusOK {
+				t.Errorf("Requisição falhou ou foi inesperadamente limitada %v", resp.StatusCode)
+			}
+			defer resp.Body.Close()
+		}(i)
+	}
+
+	wg.Wait()
+	t.Logf("Todas as requisições foram feitas com sucesso")
+}
+
 func TestRateLimiterOverLimit(t *testing.T) {
 	totalRequests := 9 // Número de requisições maior que o limite
 	bl := false
@@ -45,8 +70,8 @@ func TestRateLimiterOverLimit(t *testing.T) {
 	for i := 0; i < totalRequests; i++ {
 		go func() {
 			defer wg.Done()
-			time.Sleep(1000 * time.Millisecond)             // Espaça as requisições
-			resp, err := http.Get("http://localhost:8080/") // Substitua pela URL do seu servidor
+			time.Sleep(1000 * time.Millisecond) // Espaça as requisições
+			resp, err := http.Get("http://localhost:8080/")
 			if err != nil {
 				t.Errorf("Erro ao fazer requisição: %v", err)
 				results <- false

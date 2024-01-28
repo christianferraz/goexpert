@@ -9,7 +9,7 @@ import (
 type Config struct {
 	RedisSrc      string `mapstructure:"REDIS_SRC"`
 	RedisPass     string `mapstructure:"REDIS_PASS"`
-	AllowedTokens []string
+	AllowedTokens map[string]int
 }
 
 func LoadConfig(path string) (*Config, error) {
@@ -40,9 +40,10 @@ func LoadConfig(path string) (*Config, error) {
 	if err != nil {
 		panic(err)
 	}
-	cfg.AllowedTokens = []string{
-		"token1",
-		"token2",
+	cfg.AllowedTokens = map[string]int{
+		"token1":      100,
+		"token2":      30,
+		"192.168.0.1": 100,
 	}
 	return cfg, nil
 }

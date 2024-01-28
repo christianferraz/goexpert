@@ -11,11 +11,11 @@ import (
 
 func CountMiddleware(next http.HandlerFunc, rateLimiter *limiter.RateLimiter) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		authHeader := r.Header.Get("Authorization")
-		token := strings.TrimPrefix(authHeader, "Bearer ")
+		token := r.Header.Get("API_KEY")
+		ip := getIPAddress(r)
+		key := fmt.Sprintf("%s-%s", ip, r.URL.Path)
 
-		key := fmt.Sprintf("%s-%s", getIPAddress(r), r.URL.Path)
-		if rateLimiter.IsLimited(r.Context(), key, token) {
+		if rateLimiter.IsLimited(r.Context(), ip, key, token) {
 			http.Error(w, "Rate limit exceeded", http.StatusTooManyRequests)
 			return // Parar a execução aqui se o limite foi excedido
 		}

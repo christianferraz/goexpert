@@ -20,16 +20,11 @@ func NewRateLimiter(config *configs.Config, client *redis.Client) *RateLimiter {
 	}
 }
 
-func (r *RateLimiter) IsLimited(ctx context.Context, key string, token string) bool {
+func (r *RateLimiter) IsLimited(ctx context.Context, ip string, key string, token string) bool {
 	r_limiter := redis_rate.NewLimiter(r.RedisClient)
-	var requestLimit int
-	if isValidToken(token, r.config.AllowedTokens) {
-		requestLimit = 100
-	} else {
-		requestLimit = 10
-	}
 
-	requestLimit++
+	requestLimit := isValidToken(ip, token, r.config.AllowedTokens)
+
 	res, err := r_limiter.Allow(ctx, key, redis_rate.PerSecond(requestLimit))
 	if err != nil {
 		return true
@@ -40,11 +35,11 @@ func (r *RateLimiter) IsLimited(ctx context.Context, key string, token string) b
 	return false
 }
 
-func isValidToken(token string, tokenList []string) bool {
-	for _, t := range tokenList {
-		if t == token {
-			return true
+func isValidToken(token string, ip string, tokenList map[string]int) int {
+	for k, v := range tokenList {
+		if k == token || k == ip {
+			return v
 		}
 	}
-	return false
+	return 10
 }
