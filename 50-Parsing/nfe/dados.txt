@@ -1,0 +1,468 @@
+IOG BATAVO 1 15KG BATIDO (Código: 7891097103650 )
+Qtde.:1  UN: UN  Vl. Unit.:   12,99 	Vl. Total
+12,99
+QJ PARM FAIXA AZUL 300G (Código: 7891999014528 )
+Qtde.:1  UN: UN  Vl. Unit.:   45,99 	Vl. Total
+45,99
+QJ TP GR NER G MESTRI KG (Código: 2498 )
+Qtde.:0,138  UN: KG  Vl. Unit.:   165,99 	Vl. Total
+22,91
+QJ GRANA GRAN MESTRI KG (Código: 5868 )
+Qtde.:0,148  UN: KG  Vl. Unit.:   159,9 	Vl. Total
+23,67
+QJ GRANA GRAN MESTRI KG (Código: 5868 )
+Qtde.:0,162  UN: KG  Vl. Unit.:   159,9 	Vl. Total
+25,90
+OVOS BCO YABUTA C 20 GDE (Código: 7897532500336 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,9 	Vl. Total
+9,90
+SACOLA PLAST PDV (Código: 7898415556136 )
+Qtde.:1  UN: UN  Vl. Unit.:   0,3 	Vl. Total
+0,30
+SACOLA PLAST PDV (Código: 7898415556136 )
+Qtde.:1  UN: UN  Vl. Unit.:   0,3 	Vl. Total
+0,30
+SACOLA PLAST PDV (Código: 7898415556136 )
+Qtde.:1  UN: UN  Vl. Unit.:   0,3 	Vl. Total
+0,30
+SACOLA PLAST PDV (Código: 7898415556136 )
+Qtde.:1  UN: UN  Vl. Unit.:   0,3 	Vl. Total
+0,30
+KIT SALG ELMA CHIPS 98G (Código: 7892840818296 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,49 	Vl. Total
+14,49
+KIT SALG ELMA CHIPS 98G (Código: 7892840818296 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,49 	Vl. Total
+14,49
+KIT SALG ELMA CHIPS 98G (Código: 7892840818296 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,49 	Vl. Total
+14,49
+QUEIJO PROCESS QUATM KG (Código: 8230 )
+Qtde.:3,938  UN: KG  Vl. Unit.:   25,9 	Vl. Total
+101,99
+AMAC ROUPAS MON BIJOU 5L (Código: 7891022867411 )
+Qtde.:1  UN: UN  Vl. Unit.:   23,5 	Vl. Total
+23,50
+LEITE UHT PARMALAT 1L DE (Código: 7896034610031 )
+Qtde.:1  UN: UN  Vl. Unit.:   4,29 	Vl. Total
+4,29
+LEITE UHT PARMALAT 1L DE (Código: 7896034610031 )
+Qtde.:1  UN: UN  Vl. Unit.:   4,29 	Vl. Total
+4,29
+DESINF KALIPTO 5L (Código: 7891022853773 )
+Qtde.:1  UN: UN  Vl. Unit.:   27,79 	Vl. Total
+27,79
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+BATATA FR AMAVITA 350G (Código: 7898931140727 )
+Qtde.:1  UN: UN  Vl. Unit.:   19,39 	Vl. Total
+19,39
+DESINF KALIPTO 5L (Código: 7891022853773 )
+Qtde.:1  UN: UN  Vl. Unit.:   27,79 	Vl. Total
+27,79
+AMAC ROUPAS MON BIJOU 5L (Código: 7891022867411 )
+Qtde.:1  UN: UN  Vl. Unit.:   23,5 	Vl. Total
+23,50
+CREME AVELA NUTELLA 350G (Código: 7898024394181 )
+Qtde.:1  UN: UN  Vl. Unit.:   29,9 	Vl. Total
+29,90
+BALA PECCIN FRUTIB 600G (Código: 7896306614262 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,98 	Vl. Total
+10,98
+BALA PECCIN FRUTIB 600G (Código: 7896306614262 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,98 	Vl. Total
+10,98
+LAVA ROUPA GIR SOL 4KG (Código: 7896404607722 )
+Qtde.:1  UN: UN  Vl. Unit.:   31,9 	Vl. Total
+31,90
+AMAC ROUPAS MON BIJOU 5L (Código: 7891022867411 )
+Qtde.:1  UN: UN  Vl. Unit.:   23,5 	Vl. Total
+23,50
+LIMP MR MUSCULO 400ML (Código: 7894650012994 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,69 	Vl. Total
+10,69
+LIMP MR MUSCULO 400ML (Código: 7894650012994 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,69 	Vl. Total
+10,69
+LIMP MR MUSCULO 400ML (Código: 7894650012994 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,69 	Vl. Total
+10,69
+AG SAN GIRANDO SOL 5L (Código: 7896404605506 )
+Qtde.:1  UN: UN  Vl. Unit.:   11,9 	Vl. Total
+11,90
+AG SAN GIRANDO SOL 5L (Código: 7896404605506 )
+Qtde.:1  UN: UN  Vl. Unit.:   11,9 	Vl. Total
+11,90
+LAV LOUC YPE NEUT 5L (Código: 7896098905203 )
+Qtde.:1  UN: UN  Vl. Unit.:   25,8 	Vl. Total
+25,80
+LAV LOUC YPE NEUT 5L (Código: 7896098905203 )
+Qtde.:1  UN: UN  Vl. Unit.:   25,8 	Vl. Total
+25,80
+CERV HEINEKEN 600ML CX12 (Código: 7896045502196 )
+Qtde.:1  UN: CX  Vl. Unit.:   137,88 	Vl. Total
+137,88
+GELADINHO AMERICANO 55ML CX6 (Código: 7896704100510 )
+Qtde.:1  UN: CX  Vl. Unit.:   56,94 	Vl. Total
+56,94
+LAVA ROUP PO BRILHAN 8KG (Código: 7891150091306 )
+Qtde.:1  UN: UN  Vl. Unit.:   87,49 	Vl. Total
+87,49
+LAVA ROUP PO BRILHAN 8KG (Código: 7891150091306 )
+Qtde.:1  UN: UN  Vl. Unit.:   87,49 	Vl. Total
+87,49
+TIRA MANC VANISH 1 2L (Código: 7891035000027 )
+Qtde.:1  UN: UN  Vl. Unit.:   23,5 	Vl. Total
+23,50
+REFRIG COCA COLA 2L S AC (Código: 7894900701517 )
+Qtde.:6  UN: UN  Vl. Unit.:   8,99 	Vl. Total
+53,94
+AGUA COCO COCO QUADRADO (Código: 751320388827 )
+Qtde.:1  UN: UN  Vl. Unit.:   6,49 	Vl. Total
+6,49
+AGUA COCO COCO QUADRADO (Código: 751320388827 )
+Qtde.:1  UN: UN  Vl. Unit.:   6,49 	Vl. Total
+6,49
+CD COLGATE 70G LUMI (Código: 7509546651040 )
+Qtde.:12  UN: UN  Vl. Unit.:   10,5 	Vl. Total
+126,00
+SH 375MLCOND 170ML ELSLS (Código: 7899706175951 )
+Qtde.:1  UN: UN  Vl. Unit.:   28,9 	Vl. Total
+28,90
+LIMP MR MUSCULO 400ML (Código: 7894650000090 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,95 	Vl. Total
+10,95
+LIMP MR MUSCULO 400ML (Código: 7894650000090 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,95 	Vl. Total
+10,95
+ST LIQ PROTEX 380ML (Código: 7509546673219 )
+Qtde.:1  UN: UN  Vl. Unit.:   20,99 	Vl. Total
+20,99
+ST LIQ PROTEX 380ML (Código: 7509546673219 )
+Qtde.:1  UN: UN  Vl. Unit.:   20,99 	Vl. Total
+20,99
+LIMP MR MUSCULO 400ML (Código: 7894650000090 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,95 	Vl. Total
+10,95
+MAC DALLAS 500G ESPAG C (Código: 7896423700275 )
+Qtde.:1  UN: UN  Vl. Unit.:   3,99 	Vl. Total
+3,99
+MASS PRONT BEIJUBOM 1KG (Código: 7898313920305 )
+Qtde.:1  UN: UN  Vl. Unit.:   7,99 	Vl. Total
+7,99
+MASS PRONT BEIJUBOM 1KG (Código: 7898313920305 )
+Qtde.:1  UN: UN  Vl. Unit.:   7,99 	Vl. Total
+7,99
+LIMP MR MUSCULO 400ML (Código: 7894650000090 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,95 	Vl. Total
+10,95
+TIRA MANCHAS VANISH 1 2L (Código: 7891035000010 )
+Qtde.:1  UN: UN  Vl. Unit.:   23,5 	Vl. Total
+23,50
+SH 375MLCOND 170ML ELSLS (Código: 7899706175951 )
+Qtde.:1  UN: UN  Vl. Unit.:   28,9 	Vl. Total
+28,90
+SH SEDA 325ML CERAMIDAS (Código: 7891150068377 )
+Qtde.:1  UN: UN  Vl. Unit.:   26,99 	Vl. Total
+26,99
+TENYS PE PO 100G (Código: 7896020160069 )
+Qtde.:1  UN: UN  Vl. Unit.:   11,85 	Vl. Total
+11,85
+PUR AMB GLADE 432ML AER (Código: 7894650012321 )
+Qtde.:1  UN: UN  Vl. Unit.:   16,9 	Vl. Total
+16,90
+PUR AMB GLADE 432ML AER (Código: 7894650012321 )
+Qtde.:1  UN: UN  Vl. Unit.:   16,9 	Vl. Total
+16,90
+LIMP VEJ M USO 500ML (Código: 7891035210006 )
+Qtde.:1  UN: UN  Vl. Unit.:   4,39 	Vl. Total
+4,39
+PUR AMB GLADE 432ML AER (Código: 7894650012321 )
+Qtde.:1  UN: UN  Vl. Unit.:   16,9 	Vl. Total
+16,90
+LIMP VEJ M USO 500ML (Código: 7891035210006 )
+Qtde.:1  UN: UN  Vl. Unit.:   4,39 	Vl. Total
+4,39
+TENYS PE PO 100G (Código: 7896020160069 )
+Qtde.:1  UN: UN  Vl. Unit.:   11,85 	Vl. Total
+11,85
+LVA RPAS ARIEL RAD 1 8L (Código: 7500435142007 )
+Qtde.:1  UN: UN  Vl. Unit.:   27,95 	Vl. Total
+27,95
+AM RPA COMFORT 900ML (Código: 7891150054585 )
+Qtde.:1  UN: UN  Vl. Unit.:   19,5 	Vl. Total
+19,50
+AM RPA COMFORT 900ML (Código: 7891150054585 )
+Qtde.:1  UN: UN  Vl. Unit.:   19,5 	Vl. Total
+19,50
+LVA RPAS ARIEL RAD 1 8L (Código: 7500435142007 )
+Qtde.:1  UN: UN  Vl. Unit.:   27,95 	Vl. Total
+27,95
+AGUA COCO COCO QUADRADO (Código: 751320388827 )
+Qtde.:1  UN: UN  Vl. Unit.:   6,49 	Vl. Total
+6,49
+LIMP VEJ M USO 500ML (Código: 7891035210006 )
+Qtde.:1  UN: UN  Vl. Unit.:   4,39 	Vl. Total
+4,39
+SACO LIXO POP LAR 100L (Código: 7898293131074 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,9 	Vl. Total
+14,90
+MILHO PIPOCA PONZAN 500G (Código: 7898270960550 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,35 	Vl. Total
+9,35
+MILHO PIPOCA PONZAN 500G (Código: 7898270960550 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,35 	Vl. Total
+9,35
+BALA PECCIN FRUTIB 600G (Código: 7896306614262 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,98 	Vl. Total
+10,98
+CESTO PREND RPA SANREMO (Código: 7896359013531 )
+Qtde.:1  UN: UN  Vl. Unit.:   6,9 	Vl. Total
+6,90
+SACO LIXO IDEAL 30L C 30 (Código: 7898724681567 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,9 	Vl. Total
+9,90
+DESINF SANIT PATO 750ML (Código: 7894650938683 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,9 	Vl. Total
+14,90
+DESINF SANIT PATO 750ML (Código: 7894650938683 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,9 	Vl. Total
+14,90
+SACO LIXO IDE 100L C 10 (Código: 7898724681581 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,9 	Vl. Total
+9,90
+SACO LIXO IDEAL 15L C 40 (Código: 7898724681550 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,9 	Vl. Total
+9,90
+DESINF SANIT PATO 750ML (Código: 7894650938683 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,9 	Vl. Total
+14,90
+SACO LIXO IDEAL 50L C 15 (Código: 7898724681574 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,9 	Vl. Total
+9,90
+ST LIQ PROTEX 380ML (Código: 7509546673219 )
+Qtde.:1  UN: UN  Vl. Unit.:   20,99 	Vl. Total
+20,99
+BUCHA VEG PRYMA BANHO (Código: 7898293130176 )
+Qtde.:1  UN: UN  Vl. Unit.:   7,29 	Vl. Total
+7,29
+LOC HIDR GIOVANNA BABY (Código: 7896044954552 )
+Qtde.:1  UN: UN  Vl. Unit.:   16,95 	Vl. Total
+16,95
+CR LEITE ITAMBE 200G (Código: 7896051114024 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,79 	Vl. Total
+2,79
+CR LEITE ITAMBE 200G (Código: 7896051114024 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,79 	Vl. Total
+2,79
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+ESPONJA ESFREBOM C 4 (Código: 7896001045446 )
+Qtde.:1  UN: UN  Vl. Unit.:   5,99 	Vl. Total
+5,99
+SACO LIXO DOVER ROLL 100 (Código: 7896082824589 )
+Qtde.:1  UN: UN  Vl. Unit.:   24,9 	Vl. Total
+24,90
+ESPONJA BANHO 3M PON (Código: 7891040117277 )
+Qtde.:1  UN: UN  Vl. Unit.:   8,95 	Vl. Total
+8,95
+ESPONJA ESFREBOM C 4 (Código: 7896001045446 )
+Qtde.:1  UN: UN  Vl. Unit.:   5,99 	Vl. Total
+5,99
+ESPONJA LA ACO QLUSTRO C (Código: 7891022865004 )
+Qtde.:1  UN: UN  Vl. Unit.:   1,79 	Vl. Total
+1,79
+ESPONJA LA ACO QLUSTRO C (Código: 7891022865004 )
+Qtde.:1  UN: UN  Vl. Unit.:   1,79 	Vl. Total
+1,79
+LIMP VEJA 400ML DESENG (Código: 7891035001758 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,9 	Vl. Total
+9,90
+LIMP VEJA 400ML DESENG (Código: 7891035001758 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,9 	Vl. Total
+9,90
+LIMP VEJA 400ML DESENG (Código: 7891035001758 )
+Qtde.:1  UN: UN  Vl. Unit.:   9,9 	Vl. Total
+9,90
+D A REXONA 200ML S PERF (Código: 7891150068841 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,9 	Vl. Total
+14,90
+TENYS PE PO 100G (Código: 7896020160069 )
+Qtde.:1  UN: UN  Vl. Unit.:   11,85 	Vl. Total
+11,85
+D A REXONA 200ML S PERF (Código: 7891150068841 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,9 	Vl. Total
+14,90
+D A REXONA 200ML S PERF (Código: 7891150068841 )
+Qtde.:1  UN: UN  Vl. Unit.:   14,9 	Vl. Total
+14,90
+BATATA PALHA FREETAZ 1KG (Código: 7896221400919 )
+Qtde.:1  UN: UN  Vl. Unit.:   26,79 	Vl. Total
+26,79
+MASS PRONT BEIJUBOM 1KG (Código: 7898313920305 )
+Qtde.:1  UN: UN  Vl. Unit.:   7,99 	Vl. Total
+7,99
+BUCHA VEG PRYMA ATOAL (Código: 7898293130091 )
+Qtde.:1  UN: UN  Vl. Unit.:   7,29 	Vl. Total
+7,29
+PAO TORTA SABORZITOS 250 (Código: 7898963229094 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,98 	Vl. Total
+10,98
+CR LEITE ITAMBE 200G (Código: 7896051114024 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,79 	Vl. Total
+2,79
+CR LEITE ITAMBE 200G (Código: 7896051114024 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,79 	Vl. Total
+2,79
+LEITE FERM FRUTAP 850G (Código: 7896862002060 )
+Qtde.:1  UN: UN  Vl. Unit.:   10,89 	Vl. Total
+10,89
+IOG BATAVO GREGO 500G TR (Código: 7891097000133 )
+Qtde.:1  UN: UN  Vl. Unit.:   8,99 	Vl. Total
+8,99
+IOG BATAVO GREGO 500G TR (Código: 7891097000133 )
+Qtde.:1  UN: UN  Vl. Unit.:   8,99 	Vl. Total
+8,99
+IOG BATAVO GREGO 500G TR (Código: 7891097000133 )
+Qtde.:1  UN: UN  Vl. Unit.:   8,99 	Vl. Total
+8,99
+BROCOLIS COPACOL 1 1KG (Código: 7891527064728 )
+Qtde.:1  UN: UN  Vl. Unit.:   16,35 	Vl. Total
+16,35
+TIRINHA FGO COPACOL 1 5 (Código: 7891527063806 )
+Qtde.:1  UN: UN  Vl. Unit.:   23,95 	Vl. Total
+23,95
+PA BETTANIN JEITOSA (Código: 7896001001503 )
+Qtde.:1  UN: UN  Vl. Unit.:   26,9 	Vl. Total
+26,90
+PEDRA SANIT PRYMA 25G (Código: 7898293130053 )
+Qtde.:1  UN: UN  Vl. Unit.:   2,25 	Vl. Total
+2,25
+OLEO COAMO SOJA PET 900M CX20 (Código: 17896279600542 )
+Qtde.:1  UN: CX  Vl. Unit.:   97 	Vl. Total
+97,00
+BEB CERV HEINEKEN 350ML CX12 (Código: 7896045506880 )
+Qtde.:1  UN: CX  Vl. Unit.:   58,68 	Vl. Total
+58,68
+BEB CERV HEINEKEN 350ML CX12 (Código: 7896045506880 )
+Qtde.:1  UN: CX  Vl. Unit.:   58,68 	Vl. Total
+58,68
+LAV LOUC YPE 500ML (Código: 7896098900253 )
+Qtde.:24  UN: UN  Vl. Unit.:   2,69 	Vl. Total
+64,56
+LEITE UHT MANA 1L INT CX12 (Código: 17898958057029 )
+Qtde.:1  UN: CX  Vl. Unit.:   50,28 	Vl. Total
+50,28
+AGUA SANIT QBOA 5L (Código: 7896083800247 )
+Qtde.:1  UN: UN  Vl. Unit.:   17,5 	Vl. Total
+17,50
+REFRIG COCA COLA 2L S AC (Código: 7894900701517 )
+Qtde.:6  UN: UN  Vl. Unit.:   8,99 	Vl. Total
+53,94
+PH FOFINHO 30M LV24PG22 (Código: 7896053411633 )
+Qtde.:1  UN: UN  Vl. Unit.:   37,8 	Vl. Total
+37,80
+PH FOFINHO 30M LV24PG22 (Código: 7896053411633 )
+Qtde.:1  UN: UN  Vl. Unit.:   37,8 	Vl. Total
+37,80
+PH COTTON 30M L24 P22 (Código: 7896914001898 )
+Qtde.:1  UN: UN  Vl. Unit.:   39,8 	Vl. Total
+39,80
+AM RPA COMFORT 900ML (Código: 7891150054585 )
+Qtde.:1  UN: UN  Vl. Unit.:   19,5 	Vl. Total
+19,50
+AM RPA COMFORT 900ML (Código: 7891150054585 )
+Qtde.:1  UN: UN  Vl. Unit.:   19,5 	Vl. Total
+19,50
+PUR TOM PASSATA STA 680G (Código: 736532223418 )
+Qtde.:1  UN: UN  Vl. Unit.:   13,98 	Vl. Total
+13,98
+CAMARAO MARIS 400G S CAB (Código: 7898516365705 )
+Qtde.:1  UN: UN  Vl. Unit.:   35,9 	Vl. Total
+35,90
+PUR TOM PASSATA STA 680G (Código: 736532223418 )
+Qtde.:1  UN: UN  Vl. Unit.:   13,98 	Vl. Total
+13,98
+COXA SCOXA FGO KG CONG (Código: 916 )
+Qtde.:1,34  UN: KG  Vl. Unit.:   6,99 	Vl. Total
+9,37
+PUR TOM PASSATA STA 680G (Código: 736532223418 )
+Qtde.:1  UN: UN  Vl. Unit.:   13,98 	Vl. Total
+13,98
+COXA SCOXA FGO KG CONG (Código: 916 )
+Qtde.:0,955  UN: KG  Vl. Unit.:   6,99 	Vl. Total
+6,68
+COSTELA SUINA DALIA KG (Código: 4057 )
+Qtde.:1,71  UN: KG  Vl. Unit.:   29,98 	Vl. Total
+51,27
+PEITO FGO COPACOL KG (Código: 5182 )
+Qtde.:0,745  UN: KG  Vl. Unit.:   11,9 	Vl. Total
+8,87
+PEITO FGO COPACOL KG (Código: 5182 )
+Qtde.:0,74  UN: KG  Vl. Unit.:   11,9 	Vl. Total
+8,81
+CAFE BRASILEIRO 500G TD (Código: 7891018001386 )
+Qtde.:1  UN: UN  Vl. Unit.:   11,49 	Vl. Total
+11,49
+CAFE BRASILEIRO 500G TD (Código: 7891018001386 )
+Qtde.:1  UN: UN  Vl. Unit.:   11,49 	Vl. Total
+11,49
+CAFE BRASILEIRO 500G TD (Código: 7891018001386 )
+Qtde.:1  UN: UN  Vl. Unit.:   11,49 	Vl. Total
+11,49
+COBERT HARALD 1 01KG (Código: 7897077836877 )
+Qtde.:1  UN: UN  Vl. Unit.:   22,89 	Vl. Total
+22,89
+TIRA MANCHAS VANISH 1 2K (Código: 7891035000867 )
+Qtde.:1  UN: UN  Vl. Unit.:   44,9 	Vl. Total
+44,90
+AM RPA COMFORT 900ML (Código: 7891150054585 )
+Qtde.:1  UN: UN  Vl. Unit.:   19,5 	Vl. Total
+19,50
+TIRA MANCHAS VANISH 1 2K (Código: 7891035000874 )
+Qtde.:1  UN: UN  Vl. Unit.:   44,9 	Vl. Total
+44,90
+PEITO FGO COPACOL KG (Código: 5182 )
+Qtde.:0,99  UN: KG  Vl. Unit.:   11,9 	Vl. Total
+11,78
+PEITO FGO COPACOL KG (Código: 5182 )
+Qtde.:0,925  UN: KG  Vl. Unit.:   11,9 	Vl. Total
+11,01
+GRANOLA VILLAMAR 1KG (Código: 7891772154052 )
+Qtde.:1  UN: UN  Vl. Unit.:   22,95 	Vl. Total
+22,95
+SAL ALMIRANTE 1KG MOIDO (Código: 7896110194363 )
+Qtde.:1  UN: UN  Vl. Unit.:   1,49 	Vl. Total
+1,49
+NHOQUE STA TAVOLA 500G (Código: 736532439277 )
+Qtde.:1  UN: UN  Vl. Unit.:   7,99 	Vl. Total
+7,99
+NHOQUE STA TAVOLA 500G (Código: 736532439277 )
+Qtde.:1  UN: UN  Vl. Unit.:   7,99 	Vl. Total
+7,99
+NHOQUE STA TAVOLA 500G (Código: 736532439277 )
+Qtde.:1  UN: UN  Vl. Unit.:   7,99 	Vl. Total
+7,99

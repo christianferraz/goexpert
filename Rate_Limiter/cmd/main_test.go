@@ -8,8 +8,7 @@ import (
 )
 
 func TestRateLimiterUnderLimitWithToken(t *testing.T) {
-
-	totalRequests := 100 // Número de requisições menor que o limite
+	totalRequests := 99 // Número de requisições menor que o limite
 	var wg sync.WaitGroup
 	wg.Add(totalRequests)
 
@@ -18,16 +17,21 @@ func TestRateLimiterUnderLimitWithToken(t *testing.T) {
 			defer wg.Done()
 			req, err := http.NewRequest("GET", "http://localhost:8080/", nil)
 			if err != nil {
-				t.Errorf("Erro ao fazer requisição: %v", err)
+				t.Errorf("Erro ao criar requisição %d: %v", i, err)
+				return
 			}
 			req.Header.Set("API_KEY", "token1")
 			client := &http.Client{}
 			resp, err := client.Do(req)
-
-			if err != nil || resp.StatusCode != http.StatusOK {
-				t.Errorf("Requisição falhou ou foi inesperadamente limitada %v", resp.StatusCode)
+			if err != nil {
+				t.Errorf("Erro ao fazer requisição %d: %v", i, err)
+				return
 			}
 			defer resp.Body.Close()
+
+			if resp.StatusCode != http.StatusOK {
+				t.Errorf("Requisição %d falhou ou foi inesperadamente limitada. Status: %v", i, resp.StatusCode)
+			}
 		}(i)
 	}
 

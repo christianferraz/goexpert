@@ -2,44 +2,53 @@ package limiter
 
 import (
 	"context"
+	"fmt"
+	"strconv"
+	"time"
 
 	"github.com/christianferraz/goexpert/Rate_Limiter/configs"
-	"github.com/go-redis/redis_rate/v10"
-	"github.com/redis/go-redis/v9"
+	"github.com/christianferraz/goexpert/Rate_Limiter/internal/entity"
 )
 
 type RateLimiter struct {
-	RedisClient *redis.Client
-	config      *configs.Config
+	strClient entity.Storage
+	config    *configs.Config
 }
 
-func NewRateLimiter(config *configs.Config, client *redis.Client) *RateLimiter {
+func NewRateLimiter(config *configs.Config, str entity.Storage) *RateLimiter {
 	return &RateLimiter{
-		RedisClient: client,
-		config:      config,
+		strClient: str,
+		config:    config,
 	}
 }
 
-func (r *RateLimiter) IsLimited(ctx context.Context, ip string, key string, token string) bool {
-	r_limiter := redis_rate.NewLimiter(r.RedisClient)
+func (r *RateLimiter) IsLimited(ctx context.Context, key string) bool {
+	requestLimit := isValidToken(key, r.config.AllowedTokens)
 
-	requestLimit := isValidToken(ip, token, r.config.AllowedTokens)
-
-	res, err := r_limiter.Allow(ctx, key, redis_rate.PerSecond(requestLimit))
+	currentCountStr, err := r.strClient.Get(key)
 	if err != nil {
+		err = r.strClient.Set(key, strconv.Itoa(1), time.Second*1)
+		return err != nil
+	}
+
+	currentCount, err := strconv.Atoi(currentCountStr)
+	if err != nil {
+		// Tratar erro de conversão
 		return true
 	}
-	if res.Remaining <= 0 {
-		return true
+	if currentCount >= requestLimit {
+		return true // Requisição limitada
 	}
-	return false
+	currentCount++
+	// Incrementar contagem
+	fmt.Println("err currentCount:", currentCount)
+	err = r.strClient.Update(key, strconv.Itoa(currentCount))
+	return err != nil
 }
 
-func isValidToken(token string, ip string, tokenList map[string]int) int {
-	for k, v := range tokenList {
-		if k == token || k == ip {
-			return v
-		}
+func isValidToken(key string, tokenList map[string]int) int {
+	if limit, exists := tokenList[key]; exists {
+		return limit
 	}
 	return 10
 }
