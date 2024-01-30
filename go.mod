@@ -8,8 +8,11 @@ require (
 	github.com/christianferraz/CleanArch v0.0.0-20231211125936-699bae7bbdee
 	github.com/go-chi/chi/v5 v5.0.11
 	github.com/go-chi/jwtauth v1.2.0
-	github.com/go-redis/redis_rate/v10 v10.0.1
 	github.com/go-sql-driver/mysql v1.7.1
+	github.com/gofiber/contrib/websocket v1.3.0
+	github.com/gofiber/fiber/v2 v2.52.0
+	github.com/gofiber/fiber/v3 v3.0.0-20240129102631-738e062d5bde
+	github.com/gofiber/template/html/v2 v2.1.0
 	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.5.0
 	github.com/joho/godotenv v1.5.1
@@ -37,15 +40,19 @@ require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/gofiber/fiber/v3 v3.0.0-20240124121856-755f133ac161 // indirect
+	github.com/fasthttp/websocket v1.5.7 // indirect
+	github.com/gofiber/template v1.8.2 // indirect
+	github.com/gofiber/utils v1.1.0 // indirect
 	github.com/gofiber/utils/v2 v2.0.0-beta.3 // indirect
 	github.com/klauspost/compress v1.17.5 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mattn/go-runewidth v0.0.15 // indirect
+	github.com/rivo/uniseg v0.4.6 // indirect
+	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.51.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	google.golang.org/genproto v0.0.0-20240125205218-1f4bbc51befe // indirect
 )
 
 require (
