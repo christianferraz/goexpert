@@ -22,39 +22,47 @@ func NewRateLimiter(config *configs.Config, str entity.Storage) *RateLimiter {
 	}
 }
 
-func (r *RateLimiter) IsLimited(ctx context.Context, key string) bool {
+func (r *RateLimiter) IsLimited(ctx context.Context, key string) (bool, error) {
 	requestLimit, time_block := isValidToken(key, r.config.AllowedTokens)
 	if time_block > 0 {
-		value, _ := r.strClient.Get(fmt.Sprintf("%s-%s", "block", key))
+		value, err := r.strClient.Get(fmt.Sprintf("%s-%s", "block", key))
+		if err != nil {
+			return false, err
+		}
 		if value != "" {
-			return true
+			return true, nil
 		}
 	}
 
 	currentCountStr, err := r.strClient.Get(key)
-
 	if err != nil {
 		err = r.strClient.Set(key, strconv.Itoa(1), time.Second*1)
-		return err != nil
+		if err != nil {
+			return false, err
+		}
+		return false, nil
 	}
 
 	currentCount, err := strconv.Atoi(currentCountStr)
 	if err != nil {
-		// Tratar erro de conversão
-		return true
+		return false, err
 	}
-	if currentCount >= requestLimit {
+	if currentCount > requestLimit {
 		if time_block > 0 {
 			key := fmt.Sprintf("%s-%s", "block", key)
-			r.strClient.Set(key, strconv.Itoa(time_block), time.Second*time.Duration(time_block))
+			err = r.strClient.Set(key, strconv.Itoa(time_block), time.Second*time.Duration(time_block))
+			if err != nil {
+				return false, err
+			}
 		}
-		return true // Requisição limitada
+		return true, nil
 	}
 	currentCount++
-	// Incrementar contagem
-	fmt.Println("err currentCount:", currentCount)
 	err = r.strClient.Update(key, strconv.Itoa(currentCount))
-	return err != nil
+	if err != nil {
+		return true, err
+	}
+	return false, nil
 }
 
 func isValidToken(key string, tokenList map[string][]int) (int, int) {

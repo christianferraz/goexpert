@@ -60,6 +60,7 @@ func main() {
 			log.Printf("Erro ao converter o valor de páginas: %v\n", err)
 			continue
 		}
+		fmt.Println(valorPaginas)
 
 		valorPaginasExcedentes, err := strconv.Atoi(strings.TrimSpace(planilha.Cell(14, 1).String()))
 		if err != nil {

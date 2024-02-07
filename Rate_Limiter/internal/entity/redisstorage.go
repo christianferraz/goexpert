@@ -25,22 +25,26 @@ func (r *RedisStorage) Set(key string, value string, expiration time.Duration) e
 }
 
 func (r *RedisStorage) Update(key string, value string) error {
-	// Obter o TTL atual da chave
-	ttlVal, err := r.client.TTL(r.ctx, key).Result()
+	// Obter o TTL atual da chave em milissegundos
+	ttlVal, err := r.client.PTTL(r.ctx, key).Result()
 	if err != nil {
-		return fmt.Errorf("error getting key %s ttl: %w", key, err)
+		return fmt.Errorf("error getting TTL for key %s: %w", key, err)
 	}
-
 	// Atualizar o valor da chave
-	var ttl time.Duration
-	if ttlVal > 0 {
-		ttl = ttlVal
-	} else {
-		ttl = 0 // Ou a duração padrão que você deseja
-	}
-	err = r.client.Set(r.ctx, key, value, ttl).Err()
+	err = r.client.Set(r.ctx, key, value, 0).Err()
 	if err != nil {
 		return fmt.Errorf("error setting key %s: %w", key, err)
+	}
+
+	// Se a chave tinha um TTL, restaurar o TTL
+	if ttlVal > 0 {
+		err = r.client.PExpire(r.ctx, key, ttlVal).Err() // Usar PExpire para manter precisão em milissegundos
+		if err != nil {
+			return fmt.Errorf("error setting TTL for key %s: %w", key, err)
+		}
+	} else {
+		r.client.Del(r.ctx, key)
+		return fmt.Errorf("key %s has no TTL", key)
 	}
 
 	return nil

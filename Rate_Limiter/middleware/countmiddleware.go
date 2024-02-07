@@ -19,11 +19,17 @@ func CountMiddleware(next http.HandlerFunc, rateLimiter *limiter.RateLimiter) ht
 			key = getIPAddress(r)
 		}
 
-		if rateLimiter.IsLimited(r.Context(), key) {
-			http.Error(w, "Rate limit exceeded", http.StatusTooManyRequests)
-			return // Parar a execução aqui se o limite foi excedido
+		if i, _ := rateLimiter.IsLimited(r.Context(), key); i {
+
+			http.Error(w, "Rate limit exceeded ", http.StatusTooManyRequests)
+			return
 		}
-		fmt.Fprintf(w, "Token recebido: %s", token)
+		if token != "" {
+			fmt.Fprintf(w, "Token recebido: %s\n", token)
+		} else {
+			fmt.Fprintf(w, "IP: %s\n", key)
+		}
+
 		next.ServeHTTP(w, r)
 	})
 }

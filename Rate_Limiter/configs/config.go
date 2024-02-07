@@ -1,6 +1,11 @@
 package configs
 
 import (
+	"fmt"
+	"log"
+	"strconv"
+	"strings"
+
 	"github.com/spf13/viper"
 )
 
@@ -40,11 +45,55 @@ func LoadConfig(path string) (*Config, error) {
 	if err != nil {
 		panic(err)
 	}
-	cfg.AllowedTokens = map[string][]int{
-		// "token": {req/s, tempo de bloqueio em segundos}
-		"token1":      {100, 0},
-		"token2":      {30, 1000},
-		"192.168.0.1": {100, 0},
-	}
+	// cfg.AllowedTokens = map[string][]int{
+	// 	// "token": {req/s, tempo de bloqueio em segundos}
+	// 	"token1":      {100, 0},
+	// 	"token2":      {30, 1000},
+	// 	"192.168.0.1": {100, 0},
+	// }
+	cfg.AllowedTokens = getTokens()
 	return cfg, nil
+}
+
+func getTokens() map[string][]int {
+	AllowedTokens := make(map[string][]int)
+	i := 1
+	for {
+		tokenKey := fmt.Sprintf("TOKEN_%d", i)
+		if !viper.IsSet(tokenKey) {
+			break
+		}
+		tokenValue := viper.GetString(tokenKey)
+		parseAndAddToMap(tokenValue, AllowedTokens)
+		i++
+	}
+	j := 1
+	for {
+		ipKey := fmt.Sprintf("IP_LIMIT_%d", j)
+		if !viper.IsSet(ipKey) {
+			break
+		}
+		ipValue := viper.GetString(ipKey)
+		parseAndAddToMap(ipValue, AllowedTokens)
+		j++
+	}
+	return AllowedTokens
+}
+
+func parseAndAddToMap(value string, tokenMap map[string][]int) {
+	parts := strings.Split(value, ":")
+	if len(parts) != 3 {
+		log.Printf("Invalid format for value: %s", value)
+		return
+	}
+
+	tokenOrIP := parts[0]
+	reqPerSec, err1 := strconv.Atoi(parts[1])
+	blockTime, err2 := strconv.Atoi(parts[2])
+	if err1 != nil || err2 != nil {
+		log.Printf("Error parsing limits for %s: reqPerSec %v, blockTime %v", tokenOrIP, err1, err2)
+		return
+	}
+
+	tokenMap[tokenOrIP] = []int{reqPerSec, blockTime}
 }
