@@ -21,7 +21,7 @@ func CountMiddleware(next http.HandlerFunc, rateLimiter *limiter.RateLimiter) ht
 
 		if i, _ := rateLimiter.IsLimited(r.Context(), key); i {
 
-			http.Error(w, "Rate limit exceeded ", http.StatusTooManyRequests)
+			http.Error(w, "you have reached the maximum number of requests or actions allowed within a certain time frame", http.StatusTooManyRequests)
 			return
 		}
 		if token != "" {
