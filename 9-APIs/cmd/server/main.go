@@ -66,7 +66,6 @@ func main() {
 		r.Get("/{id}", productHandler.GetProduct)
 		r.Put("/{id}", productHandler.UpdateProduct)
 		r.Delete("/{id}", productHandler.DeleteProduct)
-
 	})
 	r.Route("/users", func(r chi.Router) {
 		// injeta o valor do de jwt no request e dará pra recuperar com r.context().Value("jwt")
