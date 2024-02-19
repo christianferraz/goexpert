@@ -33,7 +33,6 @@ func (h *WebOrderHandler) Orders(w http.ResponseWriter, r *http.Request) {
 		var dto usecase.OrderInputDTO
 		err := json.NewDecoder(r.Body).Decode(&dto)
 		if err != nil {
-			println(" carai ", r.Method)
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}

@@ -3,15 +3,15 @@ module github.com/christianferraz/goexpert
 go 1.22.0
 
 require (
-	github.com/99designs/gqlgen v0.17.43
-	github.com/aws/aws-sdk-go v1.50.13
+	github.com/99designs/gqlgen v0.17.44
+	github.com/aws/aws-sdk-go v1.50.20
 	github.com/christianferraz/CleanArch v0.0.0-20231211125936-699bae7bbdee
-	github.com/go-chi/chi/v5 v5.0.11
+	github.com/go-chi/chi/v5 v5.0.12
 	github.com/go-chi/jwtauth v1.2.0
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/gofiber/contrib/websocket v1.3.0
 	github.com/gofiber/fiber/v2 v2.52.0
-	github.com/gofiber/fiber/v3 v3.0.0-20240208065812-847a4a959d97
+	github.com/gofiber/fiber/v3 v3.0.0-20240213140423-ae8f09ac3b90
 	github.com/gofiber/template/html/v2 v2.1.0
 	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.6.0
@@ -29,7 +29,7 @@ require (
 	github.com/vektah/gqlparser/v2 v2.5.11
 	golang.org/x/crypto v0.19.0
 	golang.org/x/net v0.21.0
-	google.golang.org/grpc v1.61.0
+	google.golang.org/grpc v1.61.1
 	google.golang.org/protobuf v1.32.0
 	gorm.io/driver/mysql v1.5.4
 	gorm.io/driver/sqlite v1.5.5
@@ -48,10 +48,10 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
-	github.com/rivo/uniseg v0.4.6 // indirect
+	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.51.0 // indirect
+	github.com/valyala/fasthttp v1.52.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 )
 
@@ -103,12 +103,12 @@ require (
 	github.com/urfave/cli/v2 v2.27.1 // indirect
 	github.com/xrash/smetrics v0.0.0-20231213231151-1d8dd44e695e // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/exp v0.0.0-20240205201215-2c58cdc269a3 // indirect
+	golang.org/x/exp v0.0.0-20240213143201-ec583247a57a // indirect
 	golang.org/x/mod v0.15.0 // indirect
 	golang.org/x/sys v0.17.0 // indirect
 	golang.org/x/text v0.14.0
-	golang.org/x/tools v0.17.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240205150955-31a09d347014 // indirect
+	golang.org/x/tools v0.18.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240213162025-012b6fc9bca9 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
