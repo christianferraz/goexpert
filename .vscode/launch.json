@@ -9,7 +9,11 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/49-LeetCode/1",
+      "program": "${workspaceFolder}/30-Desafios/Stress_test",
+      "args": [
+        "--url=https://google.com.br",
+        "--requests=1"
+      ],
       "console": "integratedTerminal"
     }
   ],

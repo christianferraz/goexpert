@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/christianferraz/goexpert/Rate_Limiter/configs"
-	"github.com/christianferraz/goexpert/Rate_Limiter/internal/entity"
+	"github.com/christianferraz/goexpert/30-Desafios/Rate_Limiter/configs"
+	"github.com/christianferraz/goexpert/30-Desafios/Rate_Limiter/internal/entity"
 )
 
 type RateLimiter struct {

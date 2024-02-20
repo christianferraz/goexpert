@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/christianferraz/goexpert/Rate_Limiter/limiter"
+	"github.com/christianferraz/goexpert/30-Desafios/Rate_Limiter/limiter"
 )
 
 func CountMiddleware(next http.HandlerFunc, rateLimiter *limiter.RateLimiter) http.HandlerFunc {

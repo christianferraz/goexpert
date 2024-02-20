@@ -6,10 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/christianferraz/goexpert/Rate_Limiter/configs"
-	"github.com/christianferraz/goexpert/Rate_Limiter/internal/entity"
-	"github.com/christianferraz/goexpert/Rate_Limiter/limiter"
-	"github.com/christianferraz/goexpert/Rate_Limiter/middleware"
+	"github.com/christianferraz/goexpert/30-Desafios/Rate_Limiter/configs"
+	"github.com/christianferraz/goexpert/30-Desafios/Rate_Limiter/internal/entity"
+	"github.com/christianferraz/goexpert/30-Desafios/Rate_Limiter/limiter"
+	"github.com/christianferraz/goexpert/30-Desafios/Rate_Limiter/middleware"
 	"github.com/redis/go-redis/v9"
 )
 
