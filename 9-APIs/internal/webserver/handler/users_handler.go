@@ -59,7 +59,7 @@ func (h *UserHandler) GetJWTInput(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if !u.ValidatePassword(user.Password) {
-		http.Error(w, err.Error(), http.StatusUnauthorized)
+		http.Error(w, "erro", http.StatusUnauthorized)
 		return
 	}
 	// criar o token com o mapa de chave string e valor de qualquer coisa
