@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/30-Desafios/Stress_test",
+      "program": "${workspaceFolder}/51-Patrimonio_Client/Select",
       "args": [
         "--url=https://google.com.br",
         "--requests=1"
