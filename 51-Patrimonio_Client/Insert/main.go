@@ -7,21 +7,40 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/tealeg/xlsx"
 )
 
 type InventoryItem struct {
-	FichaEbserh    string `json:"ficha_ebserh"`
-	FichaUFMS      string `json:"ficha_ufms"`
-	DescricaoDoBem string `json:"bem_descricao"`
-	Setor          int    `json:"id_lotacao"`
-	Marca          string `json:"marca"`
-	Modelo         string `json:"modelo"`
-	Serie          string `json:"serie"`
-	DataAquisicao  string `json:"data_tombamento"`
-	CondicaoDeUso  string `json:"bem_condicao"`
+	Uorg            int     `json:"id_lotacao"`
+	CondicaoDeUso   string  `json:"bem_condicao"`
+	FichaSiads      string  `json:"ficha_siads"`
+	FichaEbserh     string  `json:"ficha_ebserh"`
+	DescricaoDoBem  string  `json:"bem_descricao"`
+	Marca           string  `json:"marca"`
+	Modelo          string  `json:"modelo"`
+	Serie           string  `json:"serie"`
+	DataAquisicao   string  `json:"data_tombamento"`
+	ValorDepreciado float64 `json:"bem_valor_depreciado"`
+	ValorAtual      float64 `json:"bem_valor_atual"`
+	FichaUFMS       string  `json:"ficha_ufms"`
+}
+
+func converterParaFloat(valorStr string) (float64, error) {
+	// Remover pontos usados para separar milhares
+	valorSemPontos := strings.Replace(valorStr, ".", "", -1)
+	// Substituir vírgula por ponto para adequar ao formato de número flutuante
+	valorCorrigido := strings.Replace(valorSemPontos, ",", ".", -1)
+
+	// Converter a string corrigida para float64
+	valorFloat, err := strconv.ParseFloat(valorCorrigido, 64)
+	if err != nil {
+		return 0, err
+	}
+	return valorFloat, nil
 }
 
 func ReadExcel(fileName string) ([]InventoryItem, error) {
@@ -37,25 +56,41 @@ func ReadExcel(fileName string) ([]InventoryItem, error) {
 			if rowIndex == 0 { // Pula o cabeçalho
 				continue
 			}
-			dataAquisicaoStr := row.Cells[6].String()
+			dataAquisicaoStr := row.Cells[8].String()
 			if dataAquisicaoStr == "" {
 				dataAquisicaoStr = "01-01-70"
 			}
 			dataAquisicao, err := time.Parse("01-02-06", dataAquisicaoStr) // MM/DD/YYYY
 			if err != nil {
-				log.Fatalf("Erro ao analisar a data: %v", err)
+				log.Fatalf("Erro ao analisar a data: %v no item %v", err, row.Cells[11].String())
 			}
-			row.Cells[6].SetFormat("02/01/2006")
+			valorDep, err := row.Cells[9].Float()
+			if err != nil {
+				log.Fatalf("Erro ao analisar o valor depreciado: %v no item %v", err, row.Cells[11].String())
+			}
+			valorAt, err := row.Cells[10].Float()
+			if err != nil {
+				log.Fatalf("Erro ao analisar o valor depreciado: %v no item %v", err, row.Cells[11].String())
+			}
+			uorgTmp, err := row.Cells[0].Int()
+			if err != nil {
+				log.Fatalf("Erro ao analisar a unidade de origem: %v no item %v", err, row.Cells[11].String())
+			}
+
 			item := InventoryItem{
-				FichaEbserh:    row.Cells[0].String(),
-				FichaUFMS:      row.Cells[1].String(),
-				DescricaoDoBem: row.Cells[2].String(),
-				Marca:          row.Cells[3].String(),
-				Modelo:         row.Cells[4].String(),
-				Serie:          row.Cells[5].String(),
-				DataAquisicao:  dataAquisicao.Format("02/01/2006"),
-				CondicaoDeUso:  row.Cells[7].String(),
-				Setor:          1,
+				FichaSiads:     row.Cells[2].String(),
+				FichaEbserh:    row.Cells[3].String(),
+				DescricaoDoBem: row.Cells[4].String(),
+				Marca:          row.Cells[5].String(),
+				Modelo:         row.Cells[6].String(),
+				Serie:          row.Cells[7].String(),
+				// FichaUFMS:      row.Cells[11].String(),
+				DataAquisicao: dataAquisicao.Format("02/01/2006"),
+				// DataAquisicao:   dataAquisicaoStr,
+				ValorDepreciado: valorDep,
+				ValorAtual:      valorAt,
+				CondicaoDeUso:   row.Cells[1].String(),
+				Uorg:            uorgTmp,
 			}
 			items = append(items, item)
 		}
@@ -64,11 +99,10 @@ func ReadExcel(fileName string) ([]InventoryItem, error) {
 	return items, nil
 }
 
-const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTM4ODg2ODIsInJvbGUiOiI5OThhZjk1NWU1YWFmY2FlYTYzNTIxYzRiNmU2ZTczOWNhZGM0MWZjN2RmYzY1ZmM3YzYxZTgyOWNhODI3MzY0Iiwic3ViIjoiZmNmMDQ4YTg2M2U0M2YzZGEwMDEzOWQ2YWE5ODg1NzRlNTgxNTMxOGNkOTRiZjRiYzkzMWUyNTFhN2ZkM2U0OWE3OWRiOGY3ODhlYjY0OTg1NDdhYzRmYTJjNTZjNGZkMDA5NGNkNzNiNmU1MjQ1YjBkY2U2ODQwMjZiNmU2NjIifQ.aWtY9Ez_GAG-LKwqC7oVd9QeqYzx6Iwpy6lft0NV6sU"
+const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQ0OTE5OTQsInJvbGUiOiI3YTI1MDU0YTViYmVkY2ZhZTViNDNiN2ZlNzdhZDBjMjM1ZjcwNTMyNjJkNDYxMDBmYjA3YTljMDI2YWIzODJmIiwic3ViIjoiNTA5MzQ1YTc5YjJjZTJlZDVkNjg4NjkyNjc1Mjk0MGM0Nzk3ODdjOTAzNTZmY2YwZjg5OGI1ZWEzYzUyYWMwMmIzMjYwNjk3YmJmMzc4ZGRjODg3YTY5OGU5MmIwMTFhNjlmZWM3ZmRkNjBhOWMwOTU1N2M2OWZhY2RhMTM0ZDYifQ.kCxVJL-GcmghZeNSaUnFAH2dIuikJKHeJhQUX4m3oi4"
 
 func main() {
-
-	excelFileName := "patrimonio.xlsx"
+	excelFileName := "ufms.xlsx"
 	const apiURL = "http://localhost:8080/patrimonio"
 
 	items, err := ReadExcel(excelFileName)
@@ -77,8 +111,7 @@ func main() {
 	}
 
 	for _, item := range items {
-
-		req, err := http.NewRequest("GET", "http://localhost:8080/patrimonio/"+item.FichaEbserh, nil)
+		req, err := http.NewRequest("GET", "http://localhost:8080/patrimonio/"+item.FichaSiads, nil)
 		if err != nil {
 			panic(err)
 		}
@@ -105,7 +138,6 @@ func main() {
 			}
 			fmt.Printf("Item %s enviado para a API\n", item.FichaEbserh)
 			continue
-
 		}
 	}
 }

@@ -30,12 +30,12 @@ func ReadExcel(fileName string) ([]string, error) {
 	return items, nil
 }
 
-const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTM4ODg2ODIsInJvbGUiOiI5OThhZjk1NWU1YWFmY2FlYTYzNTIxYzRiNmU2ZTczOWNhZGM0MWZjN2RmYzY1ZmM3YzYxZTgyOWNhODI3MzY0Iiwic3ViIjoiZmNmMDQ4YTg2M2U0M2YzZGEwMDEzOWQ2YWE5ODg1NzRlNTgxNTMxOGNkOTRiZjRiYzkzMWUyNTFhN2ZkM2U0OWE3OWRiOGY3ODhlYjY0OTg1NDdhYzRmYTJjNTZjNGZkMDA5NGNkNzNiNmU1MjQ1YjBkY2U2ODQwMjZiNmU2NjIifQ.aWtY9Ez_GAG-LKwqC7oVd9QeqYzx6Iwpy6lft0NV6sU"
+const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQ0OTY4NzgsInJvbGUiOiIxYTFhMGJiZjA2ZjMxYWI2ZTA2ZTU1NmFiZTNhMjhhZmJhOTUxNWQ4ZGNjODQwZGZlM2NjN2E1NDliZTg2MTY2Iiwic3ViIjoiYjVjNmU3YzIxODMwYjY0MDljZGU4YjhkN2FkMzVkYjNiODExYWRiYzg1NDY2ZjlhMmRlNzNmNDE5YjliNTJlMDM1NWFkMDg1NzNkYjg1NDEzMjg1MGI0NTUyNTU4ODI3MDIzNTRhZWE3MWRmYWUyZWY3ZGQyOGMzMDNkMDE1YzUifQ.EtNC4xjUq6ZvAwSJgd5tDIS0R8nlV0AXlZ6Mo7oxdog"
 
 func main() {
 
 	excelFileName := "a.xlsx"
-
+	i := 0
 	items, err := ReadExcel(excelFileName)
 	if err != nil {
 		panic(err)
@@ -65,8 +65,10 @@ func main() {
 		if string(bytes.TrimSpace(body)) == "null" {
 
 			fmt.Printf("Item %s nao encontrado\n", item)
+			i++
 			continue
 
 		}
 	}
+	fmt.Printf("Itens nao encontrados %v\n", i)
 }
