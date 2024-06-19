@@ -1,9 +1,25 @@
 package main
 
-import "github.com/joho/godotenv"
+import (
+	"context"
+	"log"
+
+	"github.com/christianferraz/goexpert/26-Leilao/configuration/database/mongodb"
+	"github.com/joho/godotenv"
+)
 
 func main() {
-	if err := godotenv.Load(".env"); err != nil {
+	ctx := context.Background()
+
+	if err := godotenv.Load("cmd/auction/.env"); err != nil {
 		panic(err)
 	}
+
+	databaseClient, err := mongodb.NewMongoDBConnection(ctx)
+	if err != nil {
+		log.Fatal(err.Error())
+		return
+	}
+
+	defer databaseClient.Client().Disconnect(ctx)
 }
