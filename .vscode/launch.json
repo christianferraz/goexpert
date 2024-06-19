@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/51-Patrimonio_Client/Insert_Inventario",
+      "program": "${workspaceFolder}/51-Patrimonio_Client/Update",
       "args": [
         "--url=https://google.com.br",
         "--requests=1"
