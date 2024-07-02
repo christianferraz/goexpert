@@ -4,15 +4,11 @@ go 1.22.4
 
 require (
 	github.com/99designs/gqlgen v0.17.49
-	github.com/aws/aws-sdk-go v1.54.4
+	github.com/aws/aws-sdk-go v1.54.12
 	github.com/christianferraz/CleanArch v0.0.0-20231211125936-699bae7bbdee
-	github.com/go-chi/chi/v5 v5.0.13
+	github.com/go-chi/chi/v5 v5.1.0
 	github.com/go-chi/jwtauth v1.2.0
 	github.com/go-sql-driver/mysql v1.8.1
-	github.com/gofiber/contrib/websocket v1.3.1
-	github.com/gofiber/fiber/v2 v2.52.4
-	github.com/gofiber/fiber/v3 v3.0.0-beta.2
-	github.com/gofiber/template/html/v2 v2.1.1
 	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.6.0
 	github.com/joho/godotenv v1.5.1
@@ -28,6 +24,7 @@ require (
 	github.com/tealeg/xlsx v1.0.5
 	github.com/valyala/fastjson v1.6.4
 	github.com/vektah/gqlparser/v2 v2.5.16
+	go.mongodb.org/mongo-driver v1.16.0
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.24.0
 	golang.org/x/net v0.26.0
@@ -40,29 +37,15 @@ require (
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
-	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/fasthttp/websocket v1.5.9 // indirect
-	github.com/gofiber/template v1.8.3 // indirect
-	github.com/gofiber/utils v1.1.0 // indirect
-	github.com/gofiber/utils/v2 v2.0.0-beta.4 // indirect
-	github.com/golang/snappy v0.0.1 // indirect
+	github.com/golang/snappy v0.0.4 // indirect
 	github.com/klauspost/compress v1.17.9 // indirect
-	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/mattn/go-runewidth v0.0.15 // indirect
-	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
-	github.com/rivo/uniseg v0.4.7 // indirect
-	github.com/savsgio/gotils v0.0.0-20240303185622-093b76447511 // indirect
-	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.55.0 // indirect
-	github.com/valyala/tcplisten v1.0.0 // indirect
+	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.1.2 // indirect
 	github.com/xdg-go/stringprep v1.0.4 // indirect
-	github.com/youmark/pkcs8 v0.0.0-20181117223130-1be2e3e5546d // indirect
-	go.mongodb.org/mongo-driver v1.15.1 // indirect
+	github.com/youmark/pkcs8 v0.0.0-20240424034433-3c2c7870ae76 // indirect
 	golang.org/x/sync v0.7.0 // indirect
 )
 
@@ -118,7 +101,7 @@ require (
 	golang.org/x/sys v0.21.0 // indirect
 	golang.org/x/text v0.16.0
 	golang.org/x/tools v0.22.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240617180043-68d350f18fd4 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240701130421-f6361c86f094 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

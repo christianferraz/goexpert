@@ -18,3 +18,7 @@ func InternalServerError(message string) *InternalError {
 		Err:     "internal_server_error",
 	}
 }
+
+func (ie *InternalError) Error() string {
+	return ie.Message
+}
