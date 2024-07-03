@@ -9,6 +9,7 @@ import (
 	"github.com/christianferraz/goexpert/26-Leilao/internal/entity/bid_entity"
 	"github.com/christianferraz/goexpert/26-Leilao/internal/internal_error"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func (bd *BidRepository) FindBidByAuctionId(ctx context.Context, auctionId string) ([]bid_entity.Bid, error) {
@@ -34,4 +35,21 @@ func (bd *BidRepository) FindBidByAuctionId(ctx context.Context, auctionId strin
 		})
 	}
 	return bidEntities, nil
+}
+
+func (bd *BidRepository) FindWinnerBidByAuctionId(ctx context.Context, auctionId string) (*bid_entity.Bid, *internal_error.InternalError) {
+	filter := bson.M{"auctionId": auctionId}
+	opts := options.FindOne().SetSort(bson.D{{Key: "amount", Value: -1}})
+	var bidEntityMongo BidEntityMongo
+	if err := bd.Collection.FindOne(ctx, filter, opts).Decode(&bidEntityMongo); err != nil {
+		logger.Error(fmt.Sprintf("Error trying to find winner bid by auctionid %s", auctionId), err)
+		return nil, internal_error.InternalServerError(fmt.Sprintf("Error trying to find winner bid by auctionid %s", auctionId))
+	}
+	return &bid_entity.Bid{
+		Id:        bidEntityMongo.Id,
+		AuctionId: bidEntityMongo.AuctionId,
+		UserId:    bidEntityMongo.UserId,
+		Amount:    bidEntityMongo.Amount,
+		Timestamp: time.Unix(bidEntityMongo.Timestamp, 0),
+	}, nil
 }
