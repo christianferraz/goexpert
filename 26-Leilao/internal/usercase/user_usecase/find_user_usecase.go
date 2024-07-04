@@ -7,6 +7,12 @@ import (
 	"github.com/christianferraz/goexpert/26-Leilao/internal/internal_error"
 )
 
+func NewUserUseCase(userRepository user_entity.UserRepositoryInterface) UserUseCaseInterface {
+	return &UserUseCase{
+		userRepository,
+	}
+}
+
 type UserUseCase struct {
 	UserRepository user_entity.UserRepositoryInterface
 }
@@ -17,19 +23,18 @@ type UserOutputDTO struct {
 }
 
 type UserUseCaseInterface interface {
-	FindUserById(ctx context.Context, id string) (UserOutputDTO, *internal_error.InternalError)
+	FindUserById(
+		ctx context.Context,
+		id string) (*UserOutputDTO, *internal_error.InternalError)
 }
 
-func NewUserUseCase() *UserUseCase {
-	return &UserUseCase{}
-
-}
-
-func (u *UserUseCase) FindUserById(ctx context.Context, id string) (*UserOutputDTO, error) {
+func (u *UserUseCase) FindUserById(
+	ctx context.Context, id string) (*UserOutputDTO, *internal_error.InternalError) {
 	userEntity, err := u.UserRepository.FindUserById(ctx, id)
 	if err != nil {
 		return nil, err
 	}
+
 	return &UserOutputDTO{
 		Id:   userEntity.Id,
 		Name: userEntity.Name,
