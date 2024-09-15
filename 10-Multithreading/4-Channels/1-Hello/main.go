@@ -18,6 +18,6 @@ func main() {
 	// Thread 1
 	fmt.Println("antes do canal")
 	msg := <-canal // Canal esvazia
-	fmt.Println("antes do canal")
+	fmt.Println("depois do canal")
 	fmt.Println(msg)
 }

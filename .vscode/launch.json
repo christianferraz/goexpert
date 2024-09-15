@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/51-Patrimonio_Client/Update",
+      "program": "${workspaceFolder}/15-UploadS3/cmd/uploader",
       "args": [
         "--url=https://google.com.br",
         "--requests=1"

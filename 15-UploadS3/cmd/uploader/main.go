@@ -28,7 +28,7 @@ func init() {
 		log.Fatalf("Some error occured. Err: %s", err)
 	}
 	sess, err := session.NewSession(&aws.Config{
-		Region: aws.String("us-east-1"),
+		Region: aws.String("sa-east-1"),
 		Credentials: credentials.NewStaticCredentials(
 			os.Getenv("AWS_ACCESS_KEY_ID"),
 			os.Getenv("AWS_SECRET_ACCESS_KEY"),
