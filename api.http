@@ -1,0 +1,10 @@
+###
+POST http://localhost:8080/api/shorten  HTTP/1.1
+Content-Type: application/json
+
+{
+  "url": "https://www.google.com"
+}
+
+###
+GET http://localhost:8080/9DbyumVi  HTTP/1.1
