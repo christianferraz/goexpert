@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"log/slog"
 	"math/rand"
 	"net/http"
 	"net/url"
@@ -16,8 +15,12 @@ func NewHandler(db map[string]string) http.Handler {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
-	r.Post("/api/shorten", HandlePost(db))
-	r.Get("/{code}", HandleGet(db))
+	r.Route("/api", func(r chi.Router) {
+		r.Route("/url", func(r chi.Router) {
+			r.Post("/shorten", HandleShortenURL(db))
+			r.Get("/{code}", HandleGetShortenedURL(db))
+		})
+	})
 	return r
 }
 
@@ -30,7 +33,7 @@ type Response struct {
 	Data  any    `json:"data,omitempty"`
 }
 
-func HandlePost(db map[string]string) http.HandlerFunc {
+func HandleShortenURL(db map[string]string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var body PostBody
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
@@ -56,31 +59,4 @@ func genCode() string {
 		bytes[i] = characters[rand.Intn(len(characters))]
 	}
 	return string(bytes)
-}
-
-func HandleGet(db map[string]string) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		code := chi.URLParam(r, "code")
-		url, ok := db[code]
-		if !ok {
-			sendJSON(w, Response{Error: "not found"}, http.StatusNotFound)
-			return
-		}
-		http.Redirect(w, r, url, http.StatusPermanentRedirect)
-	}
-}
-
-func sendJSON(w http.ResponseWriter, resp Response, status int) {
-	w.Header().Set("Content-Type", "application/json")
-	data, err := json.Marshal(resp)
-	if err != nil {
-		slog.Error("fail to marshal json", "error", err.Error())
-		sendJSON(w, Response{Error: "internal server error"}, http.StatusInternalServerError)
-		return
-	}
-	w.WriteHeader(status)
-	if _, err := w.Write(data); err != nil {
-		slog.Error("fail to write response", "error", err.Error())
-		return
-	}
 }
