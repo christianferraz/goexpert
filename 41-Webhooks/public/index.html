@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chat WebSocket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #messageInput {
+            width: 300px;
+            padding: 10px;
+        }
+        #sendButton {
+            padding: 10px 20px;
+        }
+        #messages {
+            list-style-type: none;
+            padding: 0;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+        #messages li {
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat em Tempo Real com WebSockets</h1>
+    <input id="messageInput" type="text" placeholder="Digite uma mensagem..." autocomplete="off" />
+    <button id="sendButton" onclick="sendMessage()">Enviar</button>
+    <ul id="messages"></ul>
+
+    <script>
+        var socket = new WebSocket("ws://localhost:8080/ws");
+
+        socket.onopen = function(event) {
+            console.log("Conexão estabelecida.");
+        };
+
+        socket.onmessage = function(event) {
+            var messages = document.getElementById("messages");
+            var message = document.createElement("li");
+            message.textContent = event.data;
+            messages.appendChild(message);
+        };
+
+        socket.onclose = function(event) {
+            console.log("Conexão encerrada.");
+        };
+
+        socket.onerror = function(error) {
+            console.log("Erro: " + error);
+        };
+
+        function sendMessage() {
+            var input = document.getElementById("messageInput");
+            if (input.value) {
+                socket.send(input.value);
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
