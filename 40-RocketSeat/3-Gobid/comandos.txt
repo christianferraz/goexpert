@@ -1,0 +1,5 @@
+air
+air --build.cmd "go build -o ./bin/api ./cmd/api" --build.bin "./bin/api"
+
+tern new create_users_table
+go run cmd/terndotenv/main.go
