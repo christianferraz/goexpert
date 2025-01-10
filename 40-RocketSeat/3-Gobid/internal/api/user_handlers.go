@@ -8,6 +8,7 @@ import (
 )
 
 func (a *Api) handleCreateUser(w http.ResponseWriter, r *http.Request) {
+
 	data, problems, err := jsonutils.DecodeValidJSON[user.CreateUserReq](r)
 	if err != nil {
 		_ = jsonutils.EncodeJSON(w, r, http.StatusBadRequest, problems)
