@@ -1,6 +1,6 @@
 module github.com/christianferraz/goexpert
 
-go 1.23.4
+go 1.23.5
 
 require (
 	github.com/99designs/gqlgen v0.17.61
