@@ -4,14 +4,15 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/christianferraz/goexpert/40-RocketSeat/3-Gobid/internal/services"
 	"github.com/go-chi/chi/v5"
 )
 
 type Api struct {
 	Router      *chi.Mux
-	ctx         context.Context
-	UserService *services.UserService
+	UserService services.UserService
+	Sessions    *scs.SessionManager
 }
 
 func NewApi(ctx context.Context) *Api {
