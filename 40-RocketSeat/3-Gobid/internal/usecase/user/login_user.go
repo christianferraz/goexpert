@@ -7,14 +7,13 @@ import (
 )
 
 type LoginUserReq struct {
-	Email        string `json:"email"`
+	Username     string `json:"username"`
 	PasswordHash string `json:"password_hash"`
 }
 
 func (req LoginUserReq) Valid(ctx context.Context) validator.Evaluator {
 	var eval validator.Evaluator
-	eval.CheckField(validator.NotBlank(req.Email), "email", "This field is not empty")
+	eval.CheckField(validator.NotBlank(req.Username), "username", "This field is not empty")
 	eval.CheckField(validator.NotBlank(req.PasswordHash), "password_hash", "This field is not empty")
-	eval.CheckField(validator.Matches(req.Email, validator.EmailRX), "email", "This field must be a valid email")
 	return eval
 }

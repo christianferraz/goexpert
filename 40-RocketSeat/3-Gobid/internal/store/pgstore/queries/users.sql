@@ -7,3 +7,6 @@ SELECT id, user_name, email, password_hash, bio, created_at, updated_at FROM USE
 -- name: GetUserByEmail :one
 SELECT id, user_name, email, password_hash, bio, created_at, updated_at FROM USERS WHERE email = $1;
 
+-- name: GetUserByUsername :one
+SELECT id, user_name, email, password_hash, bio, created_at, updated_at FROM USERS WHERE user_name = $1;
+

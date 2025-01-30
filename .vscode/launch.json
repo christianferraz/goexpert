@@ -9,12 +9,8 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/40-onebilliononechallenge",
-      "args": [
-        "--url=https://google.com.br",
-        "--requests=1"
-      ],
-      "console": "integratedTerminal"
+      "program": "${workspaceFolder}/40-RocketSeat/3-Gobid/cmd/api/main.go",
+      "envFile": "${workspaceFolder}/40-RocketSeat/3-Gobid/.env"
     }
   ],
   "protoc": {
