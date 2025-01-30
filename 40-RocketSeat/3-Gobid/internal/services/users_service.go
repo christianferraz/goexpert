@@ -18,8 +18,8 @@ type UserService struct {
 }
 
 var (
-	ErrDuplicatedEmailOrUsername = errors.New("Duplicated or email already exists")
-	ErrInvalidCredentials        = errors.New("Invalid credentials")
+	ErrDuplicatedEmailOrUsername = errors.New("duplicated or email already exists")
+	ErrInvalidCredentials        = errors.New("invalid credentials")
 )
 
 func NewUserService(pool *pgxpool.Pool) UserService {
