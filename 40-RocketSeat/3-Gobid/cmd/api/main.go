@@ -46,6 +46,7 @@ func main() {
 		Router:         chi.NewMux(),
 		UserService:    services.NewUserService(pool),
 		ProductService: services.NewProductService(pool),
+		BidService:     services.NewBidsService(pool),
 		Sessions:       s,
 	}
 	api.BindRoutes()
