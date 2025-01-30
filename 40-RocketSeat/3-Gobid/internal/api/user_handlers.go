@@ -33,7 +33,7 @@ func (a *Api) handleLoginUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		_ = jsonutils.EncodeJSON(w, r, http.StatusUnprocessableEntity, problem)
 	}
-	id, err := a.UserService.AuthenticateUser(r.Context(), data.Email, data.PasswordHash)
+	id, err := a.UserService.AuthenticateUser(r.Context(), data.Username, data.PasswordHash)
 	if err != nil {
 		if errors.Is(err, services.ErrInvalidCredentials) {
 			_ = jsonutils.EncodeJSON(w, r, http.StatusBadRequest, map[string]any{"error": "Invalid credentials"})
@@ -45,7 +45,7 @@ func (a *Api) handleLoginUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		_ = jsonutils.EncodeJSON(w, r, http.StatusInternalServerError, map[string]any{"error": err.Error()})
 	}
-	a.Sessions.Put(r.Context(), "AuthenticatedUserId", id.String())
+	a.Sessions.Put(r.Context(), "AuthenticatedUserId", id)
 	_ = jsonutils.EncodeJSON(w, r, http.StatusOK, map[string]any{"message": "logged in, sucessfully"})
 }
 
