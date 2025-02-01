@@ -7,6 +7,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/christianferraz/goexpert/40-RocketSeat/3-Gobid/internal/services"
 	"github.com/go-chi/chi/v5"
+	"github.com/gorilla/websocket"
 )
 
 type Api struct {
@@ -15,6 +16,8 @@ type Api struct {
 	ProductService services.ProductService
 	BidService     services.BidsService
 	Sessions       *scs.SessionManager
+	WSupgrader     websocket.Upgrader
+	AuctionLobby   services.AuctionLobby
 }
 
 func NewApi(ctx context.Context) *Api {

@@ -14,6 +14,7 @@ import (
 	"github.com/christianferraz/goexpert/40-RocketSeat/3-Gobid/internal/services"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
+	"github.com/gorilla/websocket"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -48,6 +49,14 @@ func main() {
 		ProductService: services.NewProductService(pool),
 		BidService:     services.NewBidsService(pool),
 		Sessions:       s,
+		WSupgrader: websocket.Upgrader{
+			CheckOrigin: func(r *http.Request) bool {
+				return true
+			},
+		},
+		AuctionLobby: services.AuctionLobby{
+			Rooms: make(map[uuid.UUID]*services.AuctionRoom),
+		},
 	}
 	api.BindRoutes()
 	api.Start()
