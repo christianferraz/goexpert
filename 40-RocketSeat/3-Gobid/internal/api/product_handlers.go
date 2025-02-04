@@ -1,9 +1,11 @@
 package api
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/christianferraz/goexpert/40-RocketSeat/3-Gobid/internal/jsonutils"
+	"github.com/christianferraz/goexpert/40-RocketSeat/3-Gobid/internal/services"
 	"github.com/christianferraz/goexpert/40-RocketSeat/3-Gobid/internal/usecase/product"
 	"github.com/google/uuid"
 )
@@ -19,7 +21,7 @@ func (a *Api) handleCreateProduct(w http.ResponseWriter, r *http.Request) {
 		_ = jsonutils.EncodeJSON(w, r, http.StatusInternalServerError, map[string]any{"error": "Not authenticated"})
 		return
 	}
-	id, err := a.ProductService.CreateProduct(r.Context(),
+	productId, err := a.ProductService.CreateProduct(r.Context(),
 		userId,
 		data.ProductName,
 		data.Description,
@@ -29,5 +31,14 @@ func (a *Api) handleCreateProduct(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		_ = jsonutils.EncodeJSON(w, r, http.StatusInternalServerError, map[string]any{"error": err.Error()})
 	}
-	_ = jsonutils.EncodeJSON(w, r, http.StatusCreated, map[string]any{"id": id.String()})
+	// nao passar o contexto da requisição (r.Context()) para o serviço, assim que a requisição terminar o contexto é cancelado
+	ctx, _ := context.WithDeadline(context.Background(), data.AuctionEnd)
+
+	auctionRoom := services.NewAuctionRoom(ctx, productId, &a.BidsService)
+	a.AuctionLobby.Lock()
+	a.AuctionLobby.Rooms[productId] = auctionRoom
+	a.AuctionLobby.Unlock()
+	_ = jsonutils.EncodeJSON(w, r, http.StatusCreated, map[string]any{
+		"message":    "Auction has started with success",
+		"product_id": productId.String()})
 }

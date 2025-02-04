@@ -21,7 +21,7 @@ type Message struct {
 
 type AuctionLobby struct {
 	sync.Mutex
-	Room map[uuid.UUID]*AuctionRoom
+	Rooms map[uuid.UUID]*AuctionRoom
 }
 
 type AuctionRoom struct {
@@ -59,5 +59,35 @@ func NewClient(room *AuctionRoom, conn *websocket.Conn, userId uuid.UUID) *Clien
 		Conn:   conn,
 		Send:   make(chan Message, 512),
 		UserId: userId,
+	}
+}
+
+func (r *AuctionRoom) Run() {
+	defer func() {
+		close(r.Broadcast)
+		close(r.Register)
+		close(r.Unregister)
+	}()
+	for {
+		select {
+		case client := <-r.Register:
+			r.Clients[client.UserId] = client
+		case client := <-r.Unregister:
+			if _, ok := r.Clients[client.UserId]; ok {
+				delete(r.Clients, client.UserId)
+				close(client.Send)
+			}
+		case message := <-r.Broadcast:
+			for _, client := range r.Clients {
+				select {
+				case client.Send <- message:
+				default:
+					close(client.Send)
+					delete(r.Clients, client.UserId)
+				}
+			}
+		case <-r.Context.Done():
+			return
+		}
 	}
 }
