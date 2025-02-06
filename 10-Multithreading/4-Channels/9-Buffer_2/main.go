@@ -13,6 +13,7 @@ func rotina(ch chan int) {
 	ch <- 4
 	ch <- 5
 	fmt.Println("Executou!")
+	time.Sleep(time.Second * 5)
 	ch <- 6
 }
 func main() {
@@ -20,5 +21,11 @@ func main() {
 	go rotina(ch)
 	time.Sleep(time.Second)
 	fmt.Println(<-ch)
-	fmt.Println(runtime.NumCPU())
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+	fmt.Println("nr cpus ", runtime.NumCPU())
+	close(ch)
 }

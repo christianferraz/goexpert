@@ -44,6 +44,7 @@ func main() {
 		"https://www.google.com",
 		"https://www.amazon.com",
 		"https://www.youtube.com",
+		"https://troia2025.sbop.org.br",
 	}
 
 	for _, url := range urls {
