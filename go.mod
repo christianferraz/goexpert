@@ -1,6 +1,6 @@
 module github.com/christianferraz/goexpert
 
-go 1.23.5
+go 1.23.6
 
 require (
 	github.com/99designs/gqlgen v0.17.64
@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go v1.55.6
 	github.com/christianferraz/CleanArch v0.0.0-20231211125936-699bae7bbdee
 	github.com/gin-gonic/gin v1.10.0
-	github.com/go-chi/chi/v5 v5.2.0
+	github.com/go-chi/chi/v5 v5.2.1
 	github.com/go-chi/jwtauth v1.2.0
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
@@ -16,7 +16,6 @@ require (
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.6.0
-	github.com/gorilla/csrf v1.7.2
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/jackc/pgx/v5 v5.7.2
 	github.com/joho/godotenv v1.5.1
@@ -56,7 +55,6 @@ require (
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
 	github.com/golang/snappy v0.0.4 // indirect
-	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/jackc/fake v0.0.0-20150926172116-812a484cc733 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
@@ -76,14 +74,14 @@ require (
 	github.com/xdg-go/scram v1.1.2 // indirect
 	github.com/xdg-go/stringprep v1.0.4 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
-	golang.org/x/arch v0.13.0 // indirect
-	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/arch v0.14.0 // indirect
+	golang.org/x/sync v0.11.0 // indirect
 )
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/agnivade/levenshtein v1.2.1 // indirect
-	github.com/alexedwards/scs/pgxstore v0.0.0-20240316134038-7e11d57e8885
+	github.com/alexedwards/scs/pgxstore v0.0.0-20250205215704-2e2c681ccff8
 	github.com/cpuguy83/go-md2man/v2 v2.0.6 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0 // indirect
@@ -129,11 +127,11 @@ require (
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/exp v0.0.0-20250128182459-e0ece0dbea4c // indirect
-	golang.org/x/mod v0.22.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
-	golang.org/x/text v0.21.0
+	golang.org/x/mod v0.23.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/text v0.22.0
 	golang.org/x/tools v0.29.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250127172529-29210b9bc287 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250204164813-702378808489 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
