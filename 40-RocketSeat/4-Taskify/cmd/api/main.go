@@ -10,8 +10,8 @@ import (
 
 	"github.com/alexedwards/scs/pgxstore"
 	"github.com/alexedwards/scs/v2"
-	"github.com/christianferraz/goexpert/40-RocketSeat/3-Gobid/internal/api"
-	"github.com/christianferraz/goexpert/40-RocketSeat/3-Gobid/internal/services"
+	"github.com/christianferraz/goexpert/40-RocketSeat/4-Taskify/internal/api"
+	"github.com/christianferraz/goexpert/40-RocketSeat/4-Taskify/internal/services"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
