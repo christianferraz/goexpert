@@ -8,6 +8,7 @@ require (
 	github.com/aws/aws-sdk-go v1.55.6
 	github.com/christianferraz/CleanArch v0.0.0-20231211125936-699bae7bbdee
 	github.com/gin-gonic/gin v1.10.0
+	github.com/go-chi/chi v1.5.1
 	github.com/go-chi/chi/v5 v5.2.1
 	github.com/go-chi/jwtauth v1.2.0
 	github.com/go-playground/locales v0.14.1
