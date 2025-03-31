@@ -31,7 +31,8 @@ func (a *Api) handleCreateProduct(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		_ = jsonutils.EncodeJSON(w, r, http.StatusInternalServerError, map[string]any{"error": err.Error()})
 	}
-	// nao passar o contexto da requisição (r.Context()) para o serviço, assim que a requisição terminar o contexto é cancelado
+	// nao passar o contexto da requisição (r.Context()) para o serviço, assim que a requisição terminar
+	// o contexto é cancelado
 	ctx, _ := context.WithDeadline(context.Background(), data.AuctionEnd)
 
 	auctionRoom := services.NewAuctionRoom(ctx, productId, &a.BidsService)

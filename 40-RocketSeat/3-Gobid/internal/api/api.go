@@ -1,7 +1,6 @@
 package api
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/alexedwards/scs/v2"
@@ -18,12 +17,6 @@ type Api struct {
 	Sessions       *scs.SessionManager
 	WSupgrader     websocket.Upgrader
 	AuctionLobby   services.AuctionLobby
-}
-
-func NewApi(ctx context.Context) *Api {
-	return &Api{
-		Router: chi.NewRouter(),
-	}
 }
 
 func (api *Api) Start() {
