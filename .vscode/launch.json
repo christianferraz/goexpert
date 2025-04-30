@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/2-Alura/3-Generics/cmd/main.go",
+      "program": "${workspaceFolder}/60-trigger-mgmt/cmd/main.go",
       "envFile": "${workspaceFolder}/40-RocketSeat/3-Gobid/.env"
     }
   ],
