@@ -7,10 +7,20 @@ import (
 )
 
 func main() {
-	tm := trigger.NewTriggerManager(10, 1*time.Minute, "https://uol.com.br")
+	tm := trigger.NewTriggerManager(20*time.Second, "https://10.42.0.32:30443/api/util/SyncAll")
 
 	for {
 		tm.RegisterRequest()
-		time.Sleep(1 * time.Second)
+		tm.RegisterRequest()
+		tm.RegisterRequest()
+		tm.RegisterRequest()
+		tm.RegisterRequest()
+		tm.RegisterRequest()
+		tm.RegisterRequest()
+		tm.RegisterRequest()
+		tm.RegisterRequest()
+		tm.RegisterRequest()
+		time.Sleep(1000 * time.Second)
+		tm.RegisterRequest()
 	}
 }

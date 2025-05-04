@@ -1,6 +1,7 @@
 package trigger
 
 import (
+	"crypto/tls"
 	"log"
 	"net/http"
 	"sync"
@@ -8,86 +9,75 @@ import (
 )
 
 type TriggerManager struct {
-	mu             sync.Mutex
-	requestCount   int
-	lastTrigger    time.Time
-	triggerPending bool
-	triggerRunning bool // impede múltiplas triggers simultâneas
-	minuteLimit    time.Duration
-	threshold      int
-	triggerURL     string
-	client         *http.Client
+	mu           sync.Mutex
+	requestCount int
+	triggerURL   string
+	client       *http.Client
+	interval     time.Duration
 }
 
-func NewTriggerManager(threshold int, minuteLimit time.Duration, triggerURL string) *TriggerManager {
+func NewTriggerManager(interval time.Duration, triggerURL string) *TriggerManager {
 	tm := &TriggerManager{
-		threshold:   threshold,
-		minuteLimit: minuteLimit,
-		triggerURL:  triggerURL,
+		interval:   interval,
+		triggerURL: triggerURL,
 		client: &http.Client{
+			Transport: &http.Transport{
+				TLSClientConfig: &tls.Config{
+					InsecureSkipVerify: true,
+				},
+			},
 			Timeout: 5 * time.Second,
 		},
 	}
-	go tm.monitorTrigger()
+
+	go tm.startTriggerLoop()
+
 	return tm
 }
 
+// Método chamado externamente quando uma requisição for recebida
 func (tm *TriggerManager) RegisterRequest() {
 	tm.mu.Lock()
-	defer tm.mu.Unlock()
-
 	tm.requestCount++
-	log.Printf("Requisição registrada. Total: %d", tm.requestCount)
-
-	if tm.requestCount >= tm.threshold && !tm.triggerRunning {
-		if time.Since(tm.lastTrigger) >= tm.minuteLimit {
-			tm.lastTrigger = time.Now()
-			tm.requestCount = 0
-			tm.triggerRunning = true
-			go tm.executeTriggerWithRetry()
-		} else {
-			tm.triggerPending = true
-		}
-	}
+	tm.mu.Unlock()
+	log.Printf("📥 Requisição recebida. Total acumulado: %d", tm.requestCount)
 }
 
-func (tm *TriggerManager) monitorTrigger() {
+// Loop que dispara a trigger a cada X segundos, se houver requisições
+func (tm *TriggerManager) startTriggerLoop() {
+	ticker := time.NewTicker(tm.interval)
+	defer ticker.Stop()
+
 	for {
-		time.Sleep(5 * time.Second)
+		<-ticker.C
+
 		tm.mu.Lock()
-		if tm.triggerPending && !tm.triggerRunning && time.Since(tm.lastTrigger) >= tm.minuteLimit {
-			tm.lastTrigger = time.Now()
-			tm.requestCount = 0
-			tm.triggerPending = false
-			tm.triggerRunning = true
+		if tm.requestCount > 0 {
+			log.Printf("🚨 %d requisições detectadas no intervalo. Enviando trigger...", tm.requestCount)
 			go tm.executeTriggerWithRetry()
+			tm.requestCount = 0
+		} else {
+			log.Println("⏱️ Nenhuma requisição registrada. Trigger não será enviada.")
 		}
 		tm.mu.Unlock()
 	}
 }
 
+// Envia a trigger com tentativas de retry até obter sucesso
 func (tm *TriggerManager) executeTriggerWithRetry() {
-	defer func() {
-		tm.mu.Lock()
-		tm.triggerRunning = false
-		tm.mu.Unlock()
-	}()
-
 	for {
 		log.Printf("🔁 Tentando executar trigger: %s", tm.triggerURL)
 		resp, err := tm.client.Get(tm.triggerURL)
 		if err != nil {
-			log.Printf("❌ Erro de conexão: %v", err)
+			log.Printf("❌ Erro ao conectar: %v", err)
 		} else {
 			resp.Body.Close()
 			if resp.StatusCode == http.StatusOK {
 				log.Printf("✅ Trigger executada com sucesso! Status: %d", resp.StatusCode)
 				return
 			}
-			log.Printf("⚠️ Trigger respondeu com status: %d (esperado 200)", resp.StatusCode)
+			log.Printf("⚠️ Trigger respondeu com status: %d", resp.StatusCode)
 		}
-
-		// Espera 10s antes de tentar novamente
-		time.Sleep(10 * time.Second)
+		time.Sleep(10 * time.Second) // Espera antes de tentar novamente
 	}
 }
