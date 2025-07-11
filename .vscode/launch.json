@@ -10,7 +10,7 @@
       "request": "launch",
       "mode": "auto",
       "program": "${workspaceFolder}/pdf/main.go",
-      "envFile": "${workspaceFolder}/40-RocketSeat/3-Gobid/.env"
+      // "envFile": "${workspaceFolder}/40-RocketSeat/3-Gobid/.env"
     }
   ],
   "protoc": {
