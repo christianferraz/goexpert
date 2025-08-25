@@ -15,6 +15,9 @@ import (
 
 func TestAddCourseUow(t *testing.T) {
 	dbt, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/courses")
+	if err := dbt.Ping(); err != nil {
+		panic(err)
+	}
 	assert.NoError(t, err)
 
 	dbt.Exec("DROP TABLE if exists `courses`;")
