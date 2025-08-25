@@ -12,6 +12,8 @@ import (
 
 var setRepositoryDependency = wire.NewSet(
 	product.NewProductRepository,
+	// toda vez que for necessário usar o ProductRepositoryInterface,
+	// o Wire irá fornecer o ProductRepository
 	wire.Bind(new(product.ProductRepositoryInterface), new(*product.ProductRepository)),
 )
 
