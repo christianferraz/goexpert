@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/pdf/main.go",
+      "program": "${workspaceFolder}/20-CleanArch/cmd/ordersystem",
       // "envFile": "${workspaceFolder}/40-RocketSeat/3-Gobid/.env"
     }
   ],

@@ -24,6 +24,6 @@ func (p ProductUseCase) Valid(ctx context.Context) validator.Evaluator {
 	eval.CheckField(validator.NotBlank(p.Description), "description", "This field is not empty")
 	eval.CheckField(validator.MinChars(p.ProductName, 10) && validator.MaxChars(p.ProductName, 255), "product_name", "This field must have a length between 10 and 255 characters")
 	eval.CheckField(p.Baseprice > 0, "baseprice", "This field must be greater than 0")
-	eval.CheckField(p.AuctionEnd.Sub(time.Now()) >= minAucttionDuration, "auction_end", "This field must be greater than the current date")
+	eval.CheckField(time.Until(p.AuctionEnd) >= minAucttionDuration, "auction_end", "This field must be greater than the current date")
 	return eval
 }
