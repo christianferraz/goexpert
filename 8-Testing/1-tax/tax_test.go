@@ -16,7 +16,7 @@ func TestRateLimiterUnderLimit(t *testing.T) {
 	var wg sync.WaitGroup
 	wg.Add(totalRequests)
 
-	for i := 0; i < totalRequests; i++ {
+	for range totalRequests {
 		go func() {
 			defer wg.Done()
 			resp, err := http.Get("http://localhost:8080/") // Substitua pela URL do seu servidor
