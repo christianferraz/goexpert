@@ -5,12 +5,14 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 )
 
 func main() {
 	c := http.Client{}
 	// precisa antes, bufferizar os dados para ser lido pelo Reader
 	jsonVar := bytes.NewBuffer([]byte(`{"nome":"jefferson"}`))
+	strings.NewReader(`{"nome":"jefferson"}`)
 	resp, err := c.Post("https://www.google.com.br", "application/json", jsonVar)
 	if err != nil {
 		panic(err)
