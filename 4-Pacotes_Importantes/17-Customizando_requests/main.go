@@ -1,15 +1,20 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 )
 
 func main() {
 	c := http.Client{}
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
 	// precisa antes, bufferizar os dados para ser lido pelo Reader
-	req, err := http.NewRequest(http.MethodGet, "https://www.google.com.br", nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://www.google.com.br", nil)
 	if err != nil {
 		panic(err)
 	}

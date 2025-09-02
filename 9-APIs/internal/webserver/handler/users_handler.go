@@ -63,7 +63,7 @@ func (h *UserHandler) GetJWTInput(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// criar o token com o mapa de chave string e valor de qualquer coisa
-	_, tokenString, err := jwt.Encode(map[string]interface{}{
+	_, tokenString, err := jwt.Encode(map[string]any{
 		"sub": u.ID.String(),
 		"exp": time.Now().Add(time.Second * time.Duration(jwtExpiresIn)).Unix(),
 	})

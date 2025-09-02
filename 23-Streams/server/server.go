@@ -28,20 +28,17 @@ func (ss *StreamServer) Process(conn net.Conn) {
 	// buf := make([]byte, 1024)
 	buf := new(bytes.Buffer)
 	var size int64
-	for {
-		err := binary.Read(conn, binary.LittleEndian, &size)
-		if err != nil {
-			panic(err.Error())
-		}
-		qtdBytes, err := io.CopyN(buf, conn, size)
-
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println(buf.String())
-		fmt.Println("Received", qtdBytes, "bytes from client")
-		break
+	err := binary.Read(conn, binary.LittleEndian, &size)
+	if err != nil {
+		panic(err.Error())
 	}
+	qtdBytes, err := io.CopyN(buf, conn, size)
+
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(buf.String())
+	fmt.Println("Received", qtdBytes, "bytes from client")
 }
 
 func main() {
