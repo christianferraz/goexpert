@@ -39,7 +39,7 @@ func main() {
 		case msg := <-c1: // rabbitmq
 			fmt.Printf("Received from RabbitMQ: ID: %d - %s\n", msg.id, msg.Msg)
 
-		case msg := <-c2: // kafka
+		case msg := <-c2: // kafkaP
 			fmt.Printf("Received from Kafka: ID: %d - %s\n", msg.id, msg.Msg)
 
 		case <-time.After(time.Second * 3):
