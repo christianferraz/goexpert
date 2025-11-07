@@ -59,7 +59,7 @@ func main() {
 	for i := range garfos {
 		garfos[i] = &sync.Mutex{}
 	}
-	for i := 0; i < Num_filosofos; i++ {
+	for i := range Num_filosofos {
 		filosofos[i] = &Filosofo{
 			id:        i + 1,
 			leftFork:  garfos[i],

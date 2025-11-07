@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceFolder}/39-ServerSideEvents/main.go",
+      "program": "${workspaceFolder}/10-Multithreading/4-Channels/9-Buffer_2/main.go",
       // "envFile": "${workspaceFolder}/40-RocketSeat/3-Gobid/.env"
     }
   ],

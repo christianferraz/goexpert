@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func rotina(ch chan int) {
+func rotina(ch chan<- int) {
 	ch <- 1
 	ch <- 2
 	ch <- 3
@@ -19,9 +19,9 @@ func rotina(ch chan int) {
 func main() {
 	ch := make(chan int, 6)
 	go rotina(ch)
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
 	time.Sleep(time.Second)
-	fmt.Println(<-ch)
-	fmt.Println(<-ch)
 	fmt.Println(<-ch)
 	fmt.Println(<-ch)
 	fmt.Println(<-ch)

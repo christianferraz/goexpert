@@ -1,37 +1,44 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net/http"
 	"regexp"
 	"sync"
+	"time"
 )
 
-func titulo(url string, wg *sync.WaitGroup, c chan string) {
-	defer wg.Done()
-	resp, err := http.Get(url)
+var titleRegex = regexp.MustCompile(`<title>(.*?)</title>`)
+
+func titulo(url string, c chan string) {
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	resp, err := http.DefaultClient.Do(req)
+
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	defer resp.Body.Close()
-
 	html, err := io.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	r, err := regexp.Compile(`<title>(.*?)</title>`)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	titulo := titleRegex.FindStringSubmatch(string(html))
 
-	titulo := r.FindStringSubmatch(string(html))
 	if len(titulo) > 1 {
 		c <- titulo[1]
+	} else {
+		c <- fmt.Sprintf("nao há titulo em %s", url)
 	}
 }
 
@@ -48,8 +55,9 @@ func main() {
 	}
 
 	for _, url := range urls {
-		wg.Add(1)
-		go titulo(url, &wg, c)
+		wg.Go(func() {
+			titulo(url, c)
+		})
 	}
 
 	go func() {
