@@ -431,6 +431,7 @@ github.com/go-openapi/swag v0.19.15/go.mod h1:QYRuS/SOXUCsnplDa677K7+DxSOj6IPNl/
 github.com/go-openapi/swag v0.25.1/go.mod h1:bzONdGlT0fkStgGPd3bhZf1MnuPkf2YAys6h+jZipOo=
 github.com/go-openapi/swag/cmdutils v0.25.1/go.mod h1:pdae/AFo6WxLl5L0rq87eRzVPm/XRHM3MoYgRMvG4A0=
 github.com/go-openapi/swag/fileutils v0.25.1/go.mod h1:+NXtt5xNZZqmpIpjqcujqojGFek9/w55b3ecmOdtg8M=
+github.com/go-openapi/swag/jsonutils/fixtures_test v0.25.4/go.mod h1:Mt0Ost9l3cUzVv4OEZG+WSeoHwjWLnarzMePNDAOBiM=
 github.com/go-openapi/swag/mangling v0.25.1/go.mod h1:CdiMQ6pnfAgyQGSOIYnZkXvqhnnwOn997uXZMAd/7mQ=
 github.com/go-openapi/swag/netutils v0.25.1/go.mod h1:CAkkvqnUJX8NV96tNhEQvKz8SQo2KF0f7LleiJwIeRE=
 github.com/go-sql-driver/mysql v1.7.1 h1:lUIinVbN1DY0xBg0eMOzmmtGoHwWBbvnWubQUrtU8EI=
